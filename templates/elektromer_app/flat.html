@@ -1,0 +1,40 @@
+{% extends 'elektromer_app/base.html' %}
+	{% load static %}
+	{% block content %}
+	
+
+	<h1>Byt</h1>
+
+<container>
+	<center>
+		<div class="tabulka" style="width: 80vw;">
+			<table class="table">
+			  <thead>
+			    <tr>
+			      <th scope="col">Byt č.</th>
+			      <th scope="col">Datum zapojení</th>
+			      <th scope="col">SVJ</th>
+			      <th scope="col">Gsm modul</th>
+			      <th scope="col">Majitel</th>
+			      <th scope="col">Status</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			  	{% for flat in all_flats %}
+			    	<tr>
+				      <th scope="row">{{flat.flat_number}}</th>
+				      <td>{{flat.from_date}}</td>
+				      <td>{{flat.svj}}</td>
+				      <td>{{flat.gsm_modul}}</td>
+				      <td>{{flat.customer}}</td>
+				      <td>{{flat.status}}</td>
+			    	</tr>
+			    {% endfor %}
+			  </tbody>
+			</table>
+    	</div>
+	<center>
+<container>
+
+
+	{% endblock %} 

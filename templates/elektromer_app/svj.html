@@ -1,0 +1,50 @@
+{% extends 'elektromer_app/base.html' %}
+	{% load static %}
+	{% block content %}
+	
+<h1>SVJ</h1>
+
+<container>
+	<center>
+		<div class="tabulka" style="width: 80vw;">
+			<table class="table">
+			  <thead>
+			    <tr>
+			      <th scope="col">ID</th>
+			      <th scope="col">Datum zapojení</th>
+			      <th scope="col">Název</th>
+			      <th scope="col">Ulice</th>
+			      <th scope="col">č.o</th>
+			      <th scope="col">č.p</th>
+			      <th scope="col">Město</th>
+			      <th scope="col">Psč</th>
+			      <th scope="col">Číslo účtu</th>
+			      <th scope="col">Dodavatel el.</th>
+				  <th scope="col">Počet bytů</th>
+			      <th scope="col">Status</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			  	{% for svj in all_svj %}
+			    	<tr>
+				      <th scope="row">{{svj.identification_number}}</th>
+				      <td>{{svj.from_date}}</td>
+				      <td>{{svj.name}}</td>
+				      <td>{{svj.address_street}}</td>
+				      <td>{{svj.address_orientation_number}}</td>
+				      <td>{{svj.address_number_subscription}}</td>
+				      <td>{{svj.address_city}}</td>
+				      <td>{{svj.address_postal_code}}</td>
+				      <td>{{svj.account_number}}</td>
+				      <td>{{svj.energy_supply}}</td>
+				      <td>{{svj.number_of_flats}}</td>
+				      <td>{{svj.status}}</td>
+			    	</tr>
+			    {% endfor %}
+			  </tbody>
+			</table>
+    	</div>
+	<center>
+<container>
+
+	{% endblock %} 

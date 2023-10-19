@@ -1,0 +1,35 @@
+{% extends 'elektromer_app/base.html' %}
+	{% load static %}
+	{% block content %}
+	
+
+	<h1>GSM modul</h1>
+
+<container>
+	<center>
+		<div class="tabulka" style="width: 80vw;">
+			<table class="table">
+			  <thead>
+			    <tr>
+			      <th scope="col">ID</th>
+			      <th scope="col">Datum zapojení</th>
+			      <th scope="col">SVJ</th>
+			      <th scope="col">Status</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			  	{% for gsm_modul in all_gsm_moduls %}
+			    	<tr>
+				      <th scope="row">{{gsm_modul.identification_number}}</th>
+				      <td>{{gsm_modul.from_date}}</td>
+				      <td>{{gsm_modul.svj}}</td>
+				      <td>{{gsm_modul.status}}</td>
+			    	</tr>
+			    {% endfor %}
+			  </tbody>
+			</table>
+    	</div>
+	<center>
+<container>
+
+	{% endblock %} 

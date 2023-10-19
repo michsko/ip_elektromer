@@ -1,0 +1,35 @@
+{% extends 'elektromer_app/base.html' %}
+	{% load static %}
+	{% block content %}
+	
+
+	<h1>Podružný Elektroměr</h1>
+<container>
+	<center>
+		<div class="tabulka" style="width: 80vw;">
+			<table class="table">
+			  <thead>
+			    <tr>
+			      <th scope="col">ID</th>
+			      <th scope="col">Datum zapojení</th>
+			      <th scope="col">Byt</th>
+			      <th scope="col">SVJ</th>
+			      <th scope="col">Status</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			  	{% for sub_electrometer in all_sub_electrometers %}
+			    	<tr>
+				      <th scope="row">{{sub_electrometer.identification_number}}</th>
+				      <td>{{sub_electrometer.from_date}}</td>
+				      <td>{{sub_electrometer.flat}}</td>
+				      <td>{{sub_electrometer.svj}}</td>
+				      <td>{{sub_electrometer.status}}</td>
+			    	</tr>
+			    {% endfor %}
+			  </tbody>
+			</table>
+    	</div>
+	<center>
+<container>
+	{% endblock %} 
