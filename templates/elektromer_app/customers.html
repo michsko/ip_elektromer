@@ -21,6 +21,7 @@
 			      <th scope="col">Číslo smlouvy</th>
 			      <th scope="col">SVJ</th>
 			      <th scope="col">Status</th>
+			      <th scope="col">Informace</th>
 			      
 			    </tr>
 			  </thead>
@@ -28,7 +29,7 @@
 			  	{% for customer in all_customers %}
 			    	<tr>
 				      <th scope="row">{{customer.name}}</th>
-				      <td>{{customer.surname}}</td>
+				      <td><b>{{customer.surname}}</b></td>
 				      <td>{{customer.phone}}</td>
 				      <td>{{customer.email}}</td>
 
@@ -37,6 +38,7 @@
 				      <td>{{customer.contract_number}}</td>
 				      <td>{{customer.svj}}</td>
 				      <td>{{customer.status}}</td>
+				      <td><a href="{% url 'customer' customer.id %}">Více</a></td>
 			    	</tr>
 			    {% endfor %}
 			  </tbody>

@@ -48,7 +48,7 @@ def customers(request):
 	all_customers = Customer.objects.all()
 	
 	
-	return render (request, 'elektromer_app/customers.html', {'all_customers': all_customers, 'custormer_count': customers_count})
+	return render (request, 'elektromer_app/customers.html', {'all_customers': all_customers,})
 
 """
 
