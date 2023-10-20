@@ -12,6 +12,7 @@
 			    <tr>
 			      <th scope="col">ID</th>
 			      <th scope="col">Datum zapojení</th>
+			      <th scope="col">Datum ukončení</th>
 			      <th scope="col">Název</th>
 			      <th scope="col">Ulice</th>
 			      <th scope="col">č.o</th>
@@ -21,7 +22,7 @@
 			      <th scope="col">Číslo účtu</th>
 			      <th scope="col">Dodavatel el.</th>
 				  <th scope="col">Počet bytů</th>
-			      <th scope="col">Status</th>
+			      
 			    </tr>
 			  </thead>
 			  <tbody>
@@ -29,6 +30,11 @@
 			    	<tr>
 				      <th scope="row">{{svj.identification_number}}</th>
 				      <td>{{svj.from_date}}</td>
+				      {% if svj.to_date == None %}
+				      <td class="aktivni" style="color: green;"> aktivní </td>
+				      {% else %}
+				      <tdclass="ukoncene" style="color: red;">{{svj.to_date}}</td>
+				      {% endif %}
 				      <td>{{svj.name}}</td>
 				      <td>{{svj.address_street}}</td>
 				      <td>{{svj.address_orientation_number}}</td>
@@ -38,7 +44,7 @@
 				      <td>{{svj.account_number}}</td>
 				      <td>{{svj.energy_supply}}</td>
 				      <td>{{svj.number_of_flats}}</td>
-				      <td>{{svj.status}}</td>
+				      
 			    	</tr>
 			    {% endfor %}
 			  </tbody>

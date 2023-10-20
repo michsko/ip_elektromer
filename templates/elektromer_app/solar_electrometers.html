@@ -1,0 +1,88 @@
+{% extends 'elektromer_app/base.html' %}
+	{% load static %}
+	{% load crispy_forms_tags %}
+	{% block content %}
+	
+
+
+<container>
+
+<div class="container" style=" min-width: 90vw;">
+
+<br><br>
+<h1>Solární Elektroměry</h1>
+
+<a type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#solarModal"title="Timto tlačítkem můžete přidat solární elektroměr." href=''>&nbsp; Přídat solární Elektroměr &nbsp;</a></td>
+
+
+<div class="modal" id="solarModal" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Přidat zákazníka </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+      	<form action="" method="POST">
+      	{% csrf_token %}
+
+      	{{ form|crispy}}
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zavřít</button>
+        <button type="button" class="btn btn-primary">Uložit změny</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<br><br>
+
+
+
+	<center>
+		<div class="tabulka">
+			<table class="table">
+			  <thead
+			    <tr>
+			      <th scope="col">ID</th>
+			      <th scope="col">Datum zapojení</th>
+			      <th scope="col">Datum zapojení</th>
+			      <th scope="col">SVJ</th>
+			      <th scope="col">Gsm modul</th>
+			      <th scope="col">Informace</th>
+			     
+			    </tr>
+			  </thead>
+			  <tbody>
+			  	{% for solar_electrometer in all_solar_electrometers %}
+			    	<tr>
+				      <td scope="row"><b>{{solar_electrometer.identification_number}}</b></td>
+				      <td>{{solar_electrometer.from_date}}</td>
+
+				      {% if solar_electrometer.to_date == None %}
+				      <td class="aktivni" style="color: green;"> aktivní </td>
+				      {% else %}
+				      <td class="ukoncene" style="color: red;">{{svj.to_date}}</td>
+				      {% endif %}
+
+				      <td>{{solar_electrometer.svj}}</td>
+				      <td>{{solar_electrometer.gsm_modul}}</td>
+				     
+
+				       <td><a type="button" class="btn btn-outline-primary" data-bs-toggle="tooltip" title="Timto tlačítkem můžete přejít k zobrazení tohoto solárního elektroměru." href='{% url "solar_electrometer" solar_electrometer.id %}'>&nbsp;Zobrazit &nbsp;</a></td>
+
+				      {% endfor %}
+
+			    	</tr>
+			    
+
+			  </tbody>
+			</table>
+    	</div>
+	</center>
+	</div>
+<container>
+	{% endblock %} 

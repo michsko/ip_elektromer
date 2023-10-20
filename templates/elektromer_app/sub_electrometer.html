@@ -3,33 +3,81 @@
 	{% block content %}
 	
 
-	<h1>Podružný Elektroměr</h1>
+
 <container>
+
+<div class="container" style=" min-width: 90vw;">
+
+<br><br>
+<h1>Podružný Elektroměr</h1>
+
+	<br><br>
+
 	<center>
-		<div class="tabulka" style="width: 80vw;">
+		<div class="tabulka">
 			<table class="table">
 			  <thead>
 			    <tr>
 			      <th scope="col">ID</th>
-			      <th scope="col">Datum zapojení</th>
 			      <th scope="col">Byt</th>
+			      <th scope="col">Datum zapojení</th>
+			      <th scope="col">Datum odpojení</th>
 			      <th scope="col">SVJ</th>
-			      <th scope="col">Status</th>
+			      <th scope="col">upravit</th>
+			      <th scope="col">smazat</th>
+			      
 			    </tr>
 			  </thead>
 			  <tbody>
-			  	{% for sub_electrometer in all_sub_electrometers %}
+			  	
 			    	<tr>
-				      <th scope="row">{{sub_electrometer.identification_number}}</th>
-				      <td>{{sub_electrometer.from_date}}</td>
+				      <td scope="row"><b>{{sub_electrometer.identification_number}}</b></td>
 				      <td>{{sub_electrometer.flat}}</td>
-				      <td>{{sub_electrometer.svj}}</td>
-				      <td>{{sub_electrometer.status}}</td>
+				      <td>{{sub_electrometer.from_date}}</td>				     
+
+				      {% if sub_electrometer.to_date == None %}
+				      <td class="aktivni" style="color: green;"> aktivní </td>
+				      {% else %}
+				      <td class="ukoncene" style="color: red;">{{svj.to_date}}</td>
+				      {% endif %}
+				       <td>{{sub_electrometer.svj}}</td>
+
+				         <td><button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#upravitModal" title="Timto tlačítkem můžete změnit informace o tomto podružném elektroměru." href=''>&nbsp; Upravit &nbsp;</button></td>
+
+					  	<td><a type="button" class="btn btn-outline-danger" data-bs-toggle="tooltip" title="Timto tlačítkem nevratně smažete tento podružný elektroměr." href=''>&nbsp; Smazat &nbsp;</a></td>
+
 			    	</tr>
-			    {% endfor %}
+			    
+				  		<div class="modal" id="upravitModal" tabindex="-1">
+						  <div class="modal-dialog modal-xl">
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <h5 class="modal-title">Upravit Podružný Elektroměr </h5>
+						        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						      </div>
+						      <div class="modal-body">
+
+
+						        <p> forma </p>
+						      
+
+
+						      </div>
+						      <div class="modal-footer">
+						        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zavřít</button>
+						        <button type="button" class="btn btn-primary">Uložit změny</button>
+						      </div>
+						    </div>
+						  </div>
+						</div>
+
+
+			    	</tr>
+			    
 			  </tbody>
 			</table>
     	</div>
-	<center>
+	</center>
+	</div>
 <container>
 	{% endblock %} 

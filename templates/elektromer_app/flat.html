@@ -16,7 +16,9 @@
 			      <th scope="col">SVJ</th>
 			      <th scope="col">Gsm modul</th>
 			      <th scope="col">Majitel</th>
-			      <th scope="col">Status</th>
+			      <th scope="col">Majitel od</th>
+			      <th scope="col">Majitel do</th>
+			      
 			    </tr>
 			  </thead>
 			  <tbody>
@@ -26,8 +28,15 @@
 				      <td>{{flat.from_date}}</td>
 				      <td>{{flat.svj}}</td>
 				      <td>{{flat.gsm_modul}}</td>
-				      <td>{{flat.customer}}</td>
-				      <td>{{flat.status}}</td>
+				      <td>{{flat.owner}}</td>
+				       <td>{{flat.owner_from_date}}</td>
+				       {% if flat.owner_to_date == None %}
+				      <td class="aktivni" style="color: green;"> je majitel </th>
+				      {% else %}
+				      <td class="ukoncene" style="color: red;">{{svj.to_date}}</td>
+				      {% endif %}
+
+
 			    	</tr>
 			    {% endfor %}
 			  </tbody>

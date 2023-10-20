@@ -1,0 +1,84 @@
+{% extends 'elektromer_app/base.html' %}
+	{% load static %}
+	{% block content %}
+	
+
+
+
+<container>
+
+<div class="container" style=" min-width: 90vw;">
+
+<br><br>
+
+	<h1>GSM modul</h1>
+
+<a type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#gsmModal" title="Timto tlačítkem můžete přidat gsm modul." href=''>&nbsp; Přídat GSM modul &nbsp;</a></td>
+
+<br><br>
+
+<div class="modal" id="gsmModal" tabindex="-1">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Přidat zákazníka </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+
+        <p> forma </p>
+      
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zavřít</button>
+        <button type="button" class="btn btn-primary">Uložit změny</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+	<center>
+		<div class="tabulka">
+
+			<table class="table">
+			  <thead>
+			    <tr>
+			      <th scope="col">ID</th>
+			      <th scope="col">Datum zapojení</th>
+			      <th scope="col">Datum ukončení</th>
+			      <th scope="col">SVJ</th>
+			      <th scope="col">Informace</th>
+			      
+			     
+			    </tr>
+			  </thead>
+			  <tbody>
+			  	{% for gsm_modul in all_gsm_moduls %}
+			    	<tr>
+				      <td scope="row"><b>{{gsm_modul.identification_number}}</b></td>
+				      <td>{{gsm_modul.from_date}}</td>
+				      {% if gsm_modul.to_date == None %}
+				      <td class="aktivni" style="color: green;"> aktivní </td>
+				      {% else %}
+				      <td class="ukoncene" style="color: red;">{{svj.to_date}}</td>
+				      {% endif %}
+				      <td>{{gsm_modul.svj}}</td>
+
+
+				       <td><a type="button" class="btn btn-outline-primary" data-bs-toggle="tooltip" title="Timto tlačítkem můžete přejít k zobrazení tohoto gsm modulu." href='{% url "gsm_modul" gsm_modul.id %}'>&nbsp;Zobrazit &nbsp;</a></td>
+
+				      
+			    	</tr>
+			    {% endfor %}
+			  </tbody>
+			</table>
+    	</div>
+	</center>
+</div>
+<container>
+
+	{% endblock %} 

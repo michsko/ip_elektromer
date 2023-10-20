@@ -3,13 +3,43 @@
 	{% block content %}
 	
 
+<container>
+
+	<div class="container" style=" min-width: 90vw;">
+
+<br><br>
 	<h1>Zákazníci</h1>
 
+<a type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#zakaznikModal" title="Timto tlačítkem můžete přidat zákazníka." href=''>&nbsp; Přídat Zákazníka &nbsp;</a></td>
+
+<div class="modal" id="zakaznikModal" tabindex="-1">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Přidat zákazníka </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
 
 
-	<container>
+        <p> forma </p>
+      
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zavřít</button>
+        <button type="button" class="btn btn-primary">Uložit změny</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<br><br><br>
+
 	<center>
-		<div class="tabulka" style="width: 80vw;">
+		<div class="tabulka" >
 			<table class="table">
 			  <thead>
 			    <tr>
@@ -20,7 +50,7 @@
 			      <th scope="col">Bydliště</th>
 			      <th scope="col">Číslo smlouvy</th>
 			      <th scope="col">SVJ</th>
-			      <th scope="col">Status</th>
+			     
 			      <th scope="col">Informace</th>
 			      
 			    </tr>
@@ -37,14 +67,16 @@
 
 				      <td>{{customer.contract_number}}</td>
 				      <td>{{customer.svj}}</td>
-				      <td>{{customer.status}}</td>
-				      <td><a href="{% url 'customer' customer.id %}">Více</a></td>
+				      <td><a type="button" class="btn btn-outline-primary" data-bs-toggle="tooltip" title="Timto tlačítkem můžete přejít k zobrazení tohoto zákazníka." href='{% url "customer" customer.id %}'>&nbsp;Zobrazit &nbsp;</a></td>
 			    	</tr>
 			    {% endfor %}
 			  </tbody>
 			</table>
+			
     	</div>
-	<center>
+	</center>
+</div>
+
 <container>
 
 	{% endblock %}  
