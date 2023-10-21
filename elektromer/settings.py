@@ -140,7 +140,14 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 
+# crispy format of forms 
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 
 CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+
+# date format e.g 10.10.2023
+
+DATE_INPUT_FORMATS = ["%d.%m.%Y"]
+USE_L10N = False

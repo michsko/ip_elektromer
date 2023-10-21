@@ -14,24 +14,25 @@
 <a type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#mainModal"  title="Timto tlačítkem můžete přidat hlavní elektroměr." href=''>&nbsp; Přídat hlavní Elektroměr &nbsp;</a></td>
 
 <div class="modal" id="mainModal" tabindex="-1">
-  <div class="modal-dialog modal-xl">
+
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Přidat zákazníka </h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h5 class="modal-title">Přidat solární elektroměr </h5>
+       
       </div>
-      <div class="modal-body">
+      <form id="solar_form" action='{% url "main_electrometer_add" %}' enctype="multipart/form-data" method="POST">
+      	<div class="modal-body">
+     {% load crispy_forms_tags %}
+	
+	{% csrf_token %}
 
-
-        <p> forma </p>
-      
-
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zavřít</button>
-        <button type="button" class="btn btn-primary">Uložit změny</button>
-      </div>
+    {{ form|crispy}}
+	 
+      <button type="submit" class="btn btn-success">Uložit</button>
+      <button type="button" class="btn btn-secondary" data-bs-dismiss='modal'>Zrušit</button>
+  </div>
+</form>
     </div>
   </div>
 </div>
@@ -62,7 +63,7 @@
 				      {% if main_electrometer.to_date == None %}
 				      <td class="aktivni" style="color: green;"> aktivní </td>
 				      {% else %}
-				      <td class="ukoncene" style="color: red;">{{svj.to_date}}</td>
+				      <td class="ukoncene" style="color: red;">{{main_electrometer.to_date}}</td>
 				      {% endif %}
 
 				      <td>{{main_electrometer.svj}}</td>

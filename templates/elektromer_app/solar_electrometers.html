@@ -1,6 +1,5 @@
 {% extends 'elektromer_app/base.html' %}
 	{% load static %}
-	{% load crispy_forms_tags %}
 	{% block content %}
 	
 
@@ -12,28 +11,29 @@
 <br><br>
 <h1>Solární Elektroměry</h1>
 
-<a type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#solarModal"title="Timto tlačítkem můžete přidat solární elektroměr." href=''>&nbsp; Přídat solární Elektroměr &nbsp;</a></td>
+<a type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#solarModal"title="Timto tlačítkem můžete přidat solární elektroměr."> &nbsp; Přídat solární Elektroměr &nbsp;</a></td>
 
 
 <div class="modal" id="solarModal" tabindex="-1">
+
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Přidat zákazníka </h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h5 class="modal-title">Přidat solární elektroměr </h5>
+       
       </div>
-      <div class="modal-body">
+      <form id="solar_form" action='{% url "solar_electrometer_add" %}' enctype="multipart/form-data" method="POST">
+      	<div class="modal-body">
+     {% load crispy_forms_tags %}
+	
+	{% csrf_token %}
 
-      	<form action="" method="POST">
-      	{% csrf_token %}
-
-      	{{ form|crispy}}
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zavřít</button>
-        <button type="button" class="btn btn-primary">Uložit změny</button>
-      </div>
+    {{ form|crispy}}
+	 
+      <button type="submit" class="btn btn-success">Uložit</button>
+      <button type="button" class="btn btn-secondary" data-bs-dismiss='modal'>Zrušit</button>
+  </div>
+</form>
     </div>
   </div>
 </div>
@@ -49,7 +49,7 @@
 			    <tr>
 			      <th scope="col">ID</th>
 			      <th scope="col">Datum zapojení</th>
-			      <th scope="col">Datum zapojení</th>
+			      <th scope="col">Datum odpojení</th>
 			      <th scope="col">SVJ</th>
 			      <th scope="col">Gsm modul</th>
 			      <th scope="col">Informace</th>
@@ -65,7 +65,7 @@
 				      {% if solar_electrometer.to_date == None %}
 				      <td class="aktivni" style="color: green;"> aktivní </td>
 				      {% else %}
-				      <td class="ukoncene" style="color: red;">{{svj.to_date}}</td>
+				      <td class="ukoncene" style="color: red;">{{solar_electrometer.to_date}}</td>
 				      {% endif %}
 
 				      <td>{{solar_electrometer.svj}}</td>
