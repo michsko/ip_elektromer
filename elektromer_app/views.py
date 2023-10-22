@@ -96,7 +96,7 @@ def customer_update(request, pk):
 		form=CustomerForm(request.POST, instance=customer)
 		if form.is_valid():
 			form.save()
-			return redirect('/customers')
+			return redirect('customers')
 
 	return render(request, 'elektromer_app/customer.html', {'form': form,})
 
@@ -105,8 +105,8 @@ def customer_update(request, pk):
 def customer_delete(request, pk):
 	customer = Customer.objects.get(id=pk)
 	customer.delete()
-	messages.success(request("Zákazník byl úspěšně smazán."))
-	return redirect('/customers')
+	messages.success(request,("Zákazník byl úspěšně smazán."))
+	return redirect('customers')
 
 
 
@@ -179,7 +179,7 @@ def gsm_modul_update(request, pk):
 		form=Gsm_modulForm(request.POST, instance=gsm_modul)
 		if form.is_valid():
 			form.save()
-			return redirect('/gsm_modul')
+			return redirect('gsm_modul')
 
 	return render(request, 'elektromer_app/gsm_modul_form.html', {'form': form,})
 
@@ -188,8 +188,8 @@ def gsm_modul_delete(request, pk):
 
 	gsm_modul = Gsm_modul.objects.get(id=pk)
 	gsm_modul.delete()
-	messages.success(request("Gsm modul byl úspěšně smazán."))
-	return redirect('/gsm_moduls')
+	messages.success(request,("Gsm modul byl úspěšně smazán."))
+	return redirect('gsm_moduls')
 
 
 
@@ -266,8 +266,8 @@ def main_electrometer_delete(request, pk):
 	
 	main_electrometer = Main_electrometer.objects.get(id=pk)
 	main_electrometer.delete()
-	messages.success(request("Hlavní elektroměr byl úspěšně smazán."))
-	return redirect('/main_electrometers')
+	messages.success(request,("Hlavní elektroměr byl úspěšně smazán."))
+	return redirect('main_electrometers')
 
 
 
@@ -319,25 +319,17 @@ def sub_electrometer_add(request):
 
 def sub_electrometer_update(request, pk):
 
-	
-	sub_electrometer = Sub_electrometer.objects.get(id=pk)
-	form = Sub_electrometerForm(instance=sub_electrometer)
+	return redirect('sub_electrometer')
 
-	if request.method == 'POST':
-		form=Sub_electrometerForm(request.POST, instance=sub_electrometer)
-		if form.is_valid():
-			form.save()
-			return redirect('/sub_electrometers')
 
-	return render(request, 'elektromer_app/sub_electrometer_form.html', {'form': form,})
 
 
 def sub_electrometer_delete(request, pk):
 	
 	sub_electrometer = Sub_electrometer.objects.get(id=pk)
 	sub_electrometer.delete()
-	messages.success(request("Podružný elektroměr byl úspěšně smazán."))
-	return redirect('/sub_electrometers')
+	messages.success(request,("Podružný elektroměr byl úspěšně smazán."))
+	return redirect('sub_electrometers')
 
 
 
@@ -387,27 +379,35 @@ def solar_electrometer_add(request):
 	return render(request, 'elektromer_app/solar_electrometers.html', {'form': form, 'submitted': submitted})
 
 
+
+
 def solar_electrometer_update(request, pk):
 
 	solar_electrometer = Solar_electrometer.objects.get(id=pk)
+
 	form = Solar_electrometerForm(instance=solar_electrometer)
 
-	if request.method == 'POST':
-		form=Solar_electrometerForm(request.POST, instance=solar_electrometer)
+	if request.method == "POST":
+		form = Solar_electrometerForm(request.POST, instance=solar_electrometer)
 		if form.is_valid():
 			form.save()
+			messages.success(request, ("Solární elektroměr byl úspěšně upraveny."))
 			return redirect('solar_electrometers')
+	else: 
+		form = Solar_electrometerForm(instance=solar_electrometer)
+
+	return render(request, "web_app/solar_electrometer.html", {'form': form})
 
 
 
 def solar_electrometer_delete(request, pk):
-
+	
 	solar_electrometer = Solar_electrometer.objects.get(id=pk)
 	solar_electrometer.delete()
 	messages.success(request,("Solární elektroměr byl úspěšně smazán."))
+	return redirect("solar_electrometers")
 
-	return redirect('solar_electrometers')
-
+	
 	
 
 

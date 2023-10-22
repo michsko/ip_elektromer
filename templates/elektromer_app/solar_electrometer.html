@@ -20,7 +20,7 @@
 			    <tr>
 			      <th scope="col">ID</th>
 			      <th scope="col">Datum zapojení</th>
-			      <th scope="col">Datum zapojení</th>
+			      <th scope="col">Datum odpojení</th>
 			      <th scope="col">SVJ</th>
 			      <th scope="col">Gsm modul</th>
 			      <th scope="col">upravit</th>
@@ -43,35 +43,38 @@
 				      <td>{{solar_electrometer.svj}}</td>
 				      <td>{{solar_electrometer.gsm_modul}}</td>
 				      
-  					  <td><button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#upravitModal" title="Timto tlačítkem můžete změnit informace o tomto solárním elektroměru." href=''>&nbsp; Upravit &nbsp;</button></td>
+  					  <td><a type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#upravitModal" title="Timto tlačítkem můžete změnit informace o tomto solárním elektroměru.">&nbsp; Upravit &nbsp;</a></td>
 
-					  <td><a type="button" class="btn btn-outline-danger" title="Timto tlačítkem nevratně smažete tento solární elektroměr." href='{% url "solar_electrometer_delete" solar_electrometer.id %}'>&nbsp;Smazat&nbsp;</a></td>
-
-			    	</tr>
-			    
-				  		<div class="modal" id="upravitModal" tabindex="-1">
-						  <div class="modal-dialog modal-xl">
+  					  <div class="modal" id="upravitModal" tabindex="-1">
+						  <div class="modal-dialog modal-lg">
 						    <div class="modal-content">
 						      <div class="modal-header">
-						        <h5 class="modal-title">Upravit Solární Elektroměr </h5>
-						        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						        <h5 class="modal-title">Upravit solární elektroměr </h5>
 						      </div>
-						      <div class="modal-body">
+						      <form id="solar_form" action='{% url "solar_electrometer_update" solar_electrometer.id %}' enctype="multipart/form-data" method="POST">
+						      	<div class="modal-body">
+						     	{% load crispy_forms_tags %}
+							
+								{% csrf_token %}
 
-
-						        <p> forma </p>
-						      
-
-
-						      </div>
-						      <div class="modal-footer">
-						        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zavřít</button>
-						        <button type="button" class="btn btn-primary">Uložit změny</button>
-						      </div>
+						    	{{ form|crispy }}
+							 	
+						      		<button type="submit" class="btn btn-success">Uložit</button>
+						      		<button type="button" class="btn btn-secondary" data-bs-dismiss='modal'>Zrušit</button>
+						 		</div>
+							  </form>
 						    </div>
 						  </div>
 						</div>
+
+
+					  <td><a type="submit" class="btn btn-outline-danger" title="Timto tlačítkem nevratně smažete tento solární elektroměr." href='{% url "solar_electrometer_delete" solar_electrometer.id %}'>&nbsp;Smazat&nbsp;</a></td>
+
 			    	</tr>
+			    
+						
+						<br><br>	    	
+					</tr>
 			  </tbody>
 			</table>
     	</div>
