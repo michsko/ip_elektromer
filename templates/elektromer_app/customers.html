@@ -70,7 +70,11 @@
 				      <td class="adresa" style="">{{customer.address_street}} {{customer.address_orientation_number}} / {{customer.address_number_subscription}}<br>{{customer.address_city}} {{customer.address_postal_code}}</td>
 
 				      <td>{{customer.contract_number}}</td>
-				      <td>{{customer.svj}}</td>
+
+				      <td>{% for svj in customer.svj.all %}
+				      {{svj}}<br>
+				      		{% endfor %}
+				      </td>
 				      <td><a type="button" class="btn btn-outline-primary" data-bs-toggle="tooltip" title="Timto tlačítkem můžete přejít k zobrazení tohoto zákazníka." href='{% url "customer" customer.id %}'>&nbsp;Zobrazit &nbsp;</a></td>
 			    	</tr>
 			    {% endfor %}

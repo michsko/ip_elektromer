@@ -73,6 +73,8 @@ class Customer(models.Model):
 		return self.name + " " +self.surname 
 
 
+
+
 class Chairman(models.Model):
 
 

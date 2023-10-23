@@ -5,6 +5,10 @@ from . import views
 urlpatterns = [
     path('', views.home, name="home"),
     path('svj', views.svj, name="svj"),
+    path('svj_add', views.svj_add, name="svj_add"),
+    path('svj_update/<str:pk>', views.svj_update, name="svj_update"),
+    path('svj_delete/<str:pk>', views.svj_delete, name="svj_delete"),
+
 
     path('customer/<str:pk>', views.customer, name="customer"),
     path('customers', views.customers, name="customers"),

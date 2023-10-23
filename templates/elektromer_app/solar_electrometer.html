@@ -12,7 +12,31 @@
 <h1>Solární Elektroměr</h1>
 
 	<br><br>
+		
+		<div class="modal" id="upravitModal" tabindex="-1">
 
+		  <div class="modal-dialog modal-lg">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title">Upravit solární elektroměr </h5>
+		      </div>
+		      <form id="solar_form" action='{% url "solar_electrometer_update" solar_electrometer.id %}' enctype="multipart/form-data" method="POST">
+
+		      	<div class="modal-body">
+		     	{% load crispy_forms_tags %}
+				{% csrf_token %}
+				
+				
+		    	{{ form|crispy }}
+			 	
+		      		<button type="submit" class="btn btn-success">Uložit</button>
+		      		<button type="button" class="btn btn-secondary" data-bs-dismiss='modal'>Zrušit</button>
+		 		</div>
+			  </form>
+		    </div>
+		  </div>
+		</div>
+	
 	<center>
 		<div class="tabulka">
 			<table class="table">
@@ -44,28 +68,6 @@
 				      <td>{{solar_electrometer.gsm_modul}}</td>
 				      
   					  <td><a type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#upravitModal" title="Timto tlačítkem můžete změnit informace o tomto solárním elektroměru.">&nbsp; Upravit &nbsp;</a></td>
-
-  					  <div class="modal" id="upravitModal" tabindex="-1">
-						  <div class="modal-dialog modal-lg">
-						    <div class="modal-content">
-						      <div class="modal-header">
-						        <h5 class="modal-title">Upravit solární elektroměr </h5>
-						      </div>
-						      <form id="solar_form" action='{% url "solar_electrometer_update" solar_electrometer.id %}' enctype="multipart/form-data" method="POST">
-						      	<div class="modal-body">
-						     	{% load crispy_forms_tags %}
-							
-								{% csrf_token %}
-
-						    	{{ form|crispy }}
-							 	
-						      		<button type="submit" class="btn btn-success">Uložit</button>
-						      		<button type="button" class="btn btn-secondary" data-bs-dismiss='modal'>Zrušit</button>
-						 		</div>
-							  </form>
-						    </div>
-						  </div>
-						</div>
 
 
 					  <td><a type="submit" class="btn btn-outline-danger" title="Timto tlačítkem nevratně smažete tento solární elektroměr." href='{% url "solar_electrometer_delete" solar_electrometer.id %}'>&nbsp;Smazat&nbsp;</a></td>

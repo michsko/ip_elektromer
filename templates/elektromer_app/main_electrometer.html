@@ -34,7 +34,7 @@
 				      {% if main_electrometer.to_date == None %}
 				      <td class="aktivni" style="color: green;"> aktivní </td>
 				      {% else %}
-				      <td class="ukoncene" style="color: red;">{{svj.to_date}}</td>
+				      <td class="ukoncene" style="color: red;">{{main_electrometer.to_date}}</td>
 				      {% endif %}
 
 				      <td>{{main_electrometer.svj}}</td>
@@ -44,29 +44,30 @@
 					  <td><a type="submit" class="btn btn-outline-danger" data-bs-toggle="tooltip" title="Timto tlačítkem nevratně smažete tento hlavní elektroměr." href='{% url "main_electrometer_delete" main_electrometer.id %}'>&nbsp;Smazat&nbsp;</a></td>
 
 			    	</tr>
-			    
-				  		<div class="modal" id="upravitModal" tabindex="-1">
-						  <div class="modal-dialog modal-xl">
+						<div class="modal" id="upravitModal" tabindex="-1">
+
+						  <div class="modal-dialog modal-lg">
 						    <div class="modal-content">
 						      <div class="modal-header">
-						        <h5 class="modal-title">Upravit Hlavní Elektroměr </h5>
-						        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						        <h5 class="modal-title">Upravit solární elektroměr </h5>
 						      </div>
-						      <div class="modal-body">
+						      <form id="solar_form" action='{% url "main_electrometer_update" main_electrometer.id %}' enctype="multipart/form-data" method="POST">
 
-
-						        <p> forma </p>
-						      
-
-
-						      </div>
-						      <div class="modal-footer">
-						        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zavřít</button>
-						        <button type="button" class="btn btn-primary">Uložit změny</button>
-						      </div>
+						      	<div class="modal-body">
+						     	{% load crispy_forms_tags %}
+								{% csrf_token %}
+								
+								
+						    	{{ form|crispy }}
+							 	
+						      		<button type="submit" class="btn btn-success">Uložit</button>
+						      		<button type="button" class="btn btn-secondary" data-bs-dismiss='modal'>Zrušit</button>
+						 		</div>
+							  </form>
 						    </div>
 						  </div>
 						</div>
+
 
 
 
