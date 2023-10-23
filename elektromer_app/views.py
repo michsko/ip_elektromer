@@ -9,6 +9,7 @@ from .models import Flat
 from .models import Main_electrometer
 from .models import Sub_electrometer
 from .models import Solar_electrometer
+from .models import Balance_main
 from .forms import SvjForm
 from .forms import CustomerForm
 from .forms import Gsm_modulForm
@@ -505,12 +506,67 @@ def solar_electrometer_delete(request, pk):
 	
 
 
-"""
-
 def balance_main(request):
-	return render (request, 'elektromer_app/balance_main.html', {})
+
+	all_main_balance = Balance_main.objects.all()
+	
+	return render (request, 'elektromer_app/balance_main.html', {'all_main_balance': all_main_balance, })
 
 
+
+def balance_main_add(request):	
+	submitted=False
+	if request.method == 'POST':
+		form = Balance_mainForm(request.POST)
+
+		if form.is_valid():
+			form.save()
+			messages.success(request,("Stav Hlavního elektroměru byl úspěšně přidán."))
+
+		else:
+			
+			messages.error(request, ("Zkontrolujte prosím údaje zda jsou správné"))
+		
+		return redirect("balance_main")
+
+	else:
+	
+		form = Balance_mainForm()
+		if 'submitted' in request.GET:
+			submitted = True
+
+	return render(request, 'elektromer_app/balance_main.html', {'form': form, 'submitted': submitted,})
+
+
+
+
+def balance_main_update(request, pk):
+
+	balance_main = Balance_main.objects.get(id=pk)
+	form = Balance_mainForm(request.POST, instance=balance_main)
+
+	if form.is_valid():
+		form.save()
+		messages.success(request, ('Informace o stavu Hlavního elektroměru byly změněny.'))
+
+		return redirect('balance_main')
+
+	return render(request, "web_app/balance_main.html", {'form': form, 'balance_main': balance_main,})
+
+
+
+def balance_main_delete(request, pk):
+	
+	balance_main = Balance_main.objects.get(id=pk)
+	balance_main.delete()
+	messages.success(request,("Stav Hlavního elektroměru byl úspěšně smazán."))
+	return redirect("balance_main")
+
+	
+	
+
+
+"""
 def balance_sub(request):
 	return render (request, 'elektromer_app/balance_sub.html', {})
 

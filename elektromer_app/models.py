@@ -10,16 +10,11 @@ from simple_history.models import HistoricalRecords
 
 class Svj(models.Model):
 
-	STATE = (
-		("Aktivní","Aktivní"),
-		("Pozastavené", "Pozastavené"),
-		("Neaktivní", "Neaktivní"), 
-		)
 
 	identification_number = models.CharField(max_length=255, null=False)
 	from_date = models.DateField(null=False)
 	to_date = models.DateField(blank=True, null=True)
-	status = models.CharField(max_length=150, null=True, choices=STATE)
+	
 	date_created = models.DateTimeField(auto_now_add=True, null=True)
 
 	name = models.CharField(max_length=255)
@@ -41,13 +36,6 @@ class Svj(models.Model):
 
 class Customer(models.Model):
 
-	STATE = (
-		("Aktivní","Aktivní"),
-		("Pozastavené", "Pozastavené"),
-		("Neaktivní", "Neaktivní"), 
-		)
-
-	
 
 	name = models.CharField(max_length=255, null=False)
 	surname = models.CharField(max_length=255, null=False)
@@ -62,7 +50,6 @@ class Customer(models.Model):
 	
 	svj = models.ManyToManyField(Svj)
 	
-	status = models.CharField(max_length=150, null=True, choices=STATE)
 	date_created = models.DateTimeField(auto_now_add=True, null=True)
 	
 
@@ -89,7 +76,7 @@ class Chairman(models.Model):
 	email=models.EmailField(max_length = 254, null=False)
 	from_date = models.DateField(null=False)
 	to_date = models.DateField(blank=True, null=True)
-	status = models.CharField(max_length=150, null=True, choices=STATE)
+	
 	svj = models.ForeignKey(Svj, on_delete=models.SET_NULL, null=True)
 	date_created = models.DateTimeField(auto_now_add=True, null=True)
 
@@ -103,17 +90,11 @@ class Chairman(models.Model):
 class Sub_chairman(models.Model):
 
 
-	STATE = (
-		("Aktivní","Aktivní"),
-		("Pozastavené", "Pozastavené"),
-		("Neaktivní", "Neaktivní"), 
-		)
-
 	customer= models.ForeignKey(Customer, on_delete = models.SET_NULL, null=True) 
 	email=models.EmailField(max_length = 254, null=False)
 	from_date = models.DateField(null=False)
 	to_date = models.DateField(blank=True, null=True)
-	status = models.CharField(max_length=150, null=True, choices=STATE)
+	
 	svj = models.ForeignKey(Svj, on_delete=models.SET_NULL, null=True)
 	date_created = models.DateTimeField(auto_now_add=True, null=True)
 	
@@ -127,16 +108,11 @@ class Sub_chairman(models.Model):
 class Gsm_modul(models.Model):
 
 
-	STATE = (
-		("Aktivní","Aktivní"),
-		("Pozastavené", "Pozastavené"),
-		("Neaktivní", "Neaktivní"), 
-		)
-
+	
 	identification_number = models.CharField(max_length=255, null=False)
 	from_date = models.DateField(null=False)
 	to_date = models.DateField(blank=True, null=True)
-	status = models.CharField(max_length=150, null=True, choices=STATE)
+	
 	svj = models.ForeignKey(Svj, on_delete=models.SET_NULL, null=True)
 	date_created = models.DateTimeField(auto_now_add=True, null=True)
 
@@ -150,18 +126,11 @@ class Gsm_modul(models.Model):
 class Flat(models.Model):
 
 
-	STATE = (
-		("Aktivní","Aktivní"),
-		("Pozastavené", "Pozastavené"),
-		("Neaktivní", "Neaktivní"), 
-		)
-
-
 	flat_number = models.IntegerField(null=False, default = None)
 
 	from_date = models.DateField(null=False)
 	to_date = models.DateField(blank=True, null=True)
-	status = models.CharField(max_length=150, null=True, choices=STATE)
+
 	svj = models.ForeignKey(Svj, on_delete=models.SET_NULL, null=True)
 	gsm_modul = models.ForeignKey(Gsm_modul, on_delete=models.SET_NULL, null=True)
 	owner = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
@@ -179,17 +148,10 @@ class Flat(models.Model):
 class Main_electrometer(models.Model):
 
 
-	STATE = (
-		("Aktivní","Aktivní"),
-		("Pozastavené", "Pozastavené"),
-		("Neaktivní", "Neaktivní"), 
-		)
-
-
 	identification_number = models.CharField(max_length=255, null=False)
 	from_date = models.DateField(null=True)
 	to_date = models.DateField(blank=True, null=True)
-	status = models.CharField(max_length=150, null=True, choices=STATE)
+	
 	svj = models.ForeignKey(Svj, on_delete=models.SET_NULL, null=True)
 	date_created = models.DateTimeField(auto_now_add=True, null=True)
 
@@ -203,17 +165,10 @@ class Main_electrometer(models.Model):
 class Sub_electrometer(models.Model):
 
 
-	STATE = (
-		("Aktivní","Aktivní"),
-		("Pozastavené", "Pozastavené"),
-		("Neaktivní", "Neaktivní"), 
-		)
-
-
 	identification_number = models.CharField(max_length=255, null=False)
 	from_date = models.DateField(null=False)
 	to_date = models.DateField(blank=True, null=True)
-	status = models.CharField(max_length=150, null=True, choices=STATE)
+
 	flat = models.ForeignKey(Flat, on_delete=models.SET_NULL, null=True)
 	svj = models.ForeignKey(Svj, on_delete=models.SET_NULL, null=True)
 	date_created = models.DateTimeField(auto_now_add=True, null=True)
@@ -226,17 +181,10 @@ class Sub_electrometer(models.Model):
 class Solar_electrometer(models.Model):
 
 
-	STATE = (
-		("Aktivní","Aktivní"),
-		("Pozastavené", "Pozastavené"),
-		("Neaktivní", "Neaktivní"), 
-		)
-
-
 	identification_number = models.CharField(max_length=255, null=False)
 	from_date = models.DateField(null=False)
 	to_date = models.DateField(blank=True, null=True)
-	status = models.CharField(max_length=150, null=True, choices=STATE)
+
 	svj = models.ForeignKey(Svj, on_delete=models.SET_NULL, null=True)
 	gsm_modul = models.ForeignKey(Gsm_modul, on_delete=models.SET_NULL, null=True)
 	date_created = models.DateTimeField(auto_now_add=True, null=True)

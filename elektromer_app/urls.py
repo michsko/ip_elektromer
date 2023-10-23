@@ -48,7 +48,11 @@ urlpatterns = [
     path('solar_electrometer_update/<str:pk>', views.solar_electrometer_update, name="solar_electrometer_update"),
     path('solar_electrometer_delete/<str:pk>', views.solar_electrometer_delete, name="solar_electrometer_delete"),
 
-    #path('balance_main', views.balance_main, name="balance_main"),
+    path('balance_main', views.balance_main, name="balance_main"),
+    path('balance_main_add', views.balance_main_add, name="balance_main_add"),
+    path('balance_main_update/<str:pk>', views.balance_main_update, name="balance_main_update"),
+    path('balance_main_delete/<str:pk', views.balance_main_delete, name="balance_main_delete"),
+
     #path('balance_sub', views.balance_sub, name="balance_sub"),
     #path('balance_solar', views.balance_solar, name="balance_solar"),
     		
