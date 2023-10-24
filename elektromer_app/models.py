@@ -19,11 +19,11 @@ class Svj(models.Model):
 
 	name = models.CharField(max_length=255)
 	address_street = models.CharField(max_length=255)
-	address_orientation_number = models.IntegerField(default=0)
+	address_orientation_number = models.IntegerField(default=0, null=True, blank=True)
 	address_number_subscription= models.IntegerField(default=0)
 	address_city = models.CharField(max_length=255)
 	address_postal_code = models.IntegerField(default=0)
-	account_number = models.CharField(max_length=255)
+	account_number = models.CharField(max_length=255, null=True, blank=True)
 	energy_supply = models.CharField(max_length=255)
 	number_of_flats = models.IntegerField(default=0, null=False)
 
@@ -42,11 +42,11 @@ class Customer(models.Model):
 	phone = models.CharField(max_length=255, null=False)
 	email = models.EmailField(max_length=244, null=False)
 	address_street = models.CharField(max_length=255)
-	address_orientation_number = models.IntegerField(default=0)
+	address_orientation_number = models.IntegerField(default=0, null=True, blank=True)
 	address_number_subscription= models.IntegerField(default=0)
 	address_city = models.CharField(max_length=255)
 	address_postal_code = models.IntegerField(default=0)
-	contract_number = models.CharField(max_length=255)
+	contract_number = models.CharField(max_length=255, null=True, blank=True)
 	
 	svj = models.ManyToManyField(Svj)
 	
@@ -113,7 +113,7 @@ class Gsm_modul(models.Model):
 	from_date = models.DateField(null=False)
 	to_date = models.DateField(blank=True, null=True)
 	
-	svj = models.ForeignKey(Svj, on_delete=models.SET_NULL, null=True)
+	svj = models.ForeignKey(Svj, on_delete=models.SET_NULL, null=True, blank=True)
 	date_created = models.DateTimeField(auto_now_add=True, null=True)
 
 	history = HistoricalRecords()
@@ -143,6 +143,8 @@ class Flat(models.Model):
 
 	def __str__(self):
 		return str("byt č. ") + str( self.flat_number ) + "  --  " + str(self.svj) 	
+
+
 
 
 class Main_electrometer(models.Model):

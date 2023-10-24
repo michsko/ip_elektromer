@@ -10,13 +10,18 @@ from .models import Main_electrometer
 from .models import Sub_electrometer
 from .models import Solar_electrometer
 from .models import Balance_main
+from .models import Balance_sub
+from .models import Balance_solar
 from .forms import SvjForm
 from .forms import CustomerForm
 from .forms import Gsm_modulForm
 from .forms import Main_electrometerForm
 from .forms import Sub_electrometerForm
 from .forms import Solar_electrometerForm
-
+from .forms import Balance_mainForm
+from .forms import Balance_subForm
+from .forms import Balance_solarForm
+from .forms import FlatForm
 # Create your views here.
 
 
@@ -26,16 +31,24 @@ def home (request):
 
 
 
-def svj (request):
+def svj (request, pk):
 
-	form=SvjForm()
-	form2=SvjForm()
+
+	svj = Svj.objects.get(id=pk)
+	form = SvjForm(instance=svj)
+
+	return render (request, 'elektromer_app/svj.html', {'svj': svj, 'form': form,})
+
+
+def svjs (request):
+
+	form = SvjForm()
 
 	all_svj = Svj.objects.all()
 
-	return render (request, 'elektromer_app/svj.html', {'all_svj': all_svj,
-		'form': form, 
-		'form2': form2,})
+	return render (request, 'elektromer_app/svjs.html', {'all_svj': all_svj,
+		'form': form,})
+
 
 
 
@@ -54,7 +67,7 @@ def svj_add (request):
 			
 			messages.error(request, ("Zkontrolujte prosím údaje zda jsou správné"))
 		
-		return redirect("svj")
+		return redirect("svjs")
 
 	else:
 	
@@ -62,7 +75,7 @@ def svj_add (request):
 		if 'submitted' in request.GET:
 			submitted = True
 
-	return render(request, 'elektromer_app/svj.html', {'form': form, 
+	return render(request, 'elektromer_app/svjs.html', {'form': form, 
 		'submitted': submitted,})
 
 	
@@ -72,7 +85,7 @@ def svj_delete (request, pk):
 	svj = Svj.objects.get(id=pk)
 	svj.delete()
 	messages.success(request,("Svj bylo úspěšně smazáno."))
-	return redirect('svj')
+	return redirect('svjs')
 
 
 
@@ -82,15 +95,15 @@ def svj_update (request, pk):
 
 	svj = Svj.objects.get(id=pk)
 
-	form2 = SvjForm(instance=customer)
+	form = SvjForm(instance=customer)
 
 	if request.method == 'POST':
-		form2=SvjForm(request.POST, instance=customer)
+		form=SvjForm(request.POST, instance=customer)
 		if form.is_valid():
 			form.save()
 			return redirect('svj')
 
-	return render(request, 'elektromer_app/svj.html', {'form2': form2,})
+	return render(request, 'elektromer_app/svj.html', {'form': form,})
 	
 
 
@@ -101,7 +114,6 @@ def customer(request, pk):
 	customer = Customer.objects.get(id=pk)
 
 	customer_flats = customer.flat_set.all()
-
 
 
 	flat_count = customer_flats.count()
@@ -198,15 +210,17 @@ def gsm_modul(request, pk):
 	gsm_modul = Gsm_modul.objects.get(id=pk)
 	form = Gsm_modulForm(instance=gsm_modul)
 
-	return render (request, 'elektromer_app/gsm_modul.html', {'gsm_modul':gsm_modul, 'form': form, })
+	return render (request, 'elektromer_app/gsm_modul.html', {'gsm_modul':gsm_modul, 
+		'form': form, })
 
 
 def gsm_moduls(request):
 
-	all_gsm_moduls = Gsm_modul.objects.all()
+	all_gsm_moduls = Gsm_modul.objects.all().order_by('svj')
 	form = Gsm_modulForm()
 
-	return render (request, 'elektromer_app/gsm_moduls.html', {'all_gsm_moduls': all_gsm_moduls, 'form': form})
+	return render (request, 'elektromer_app/gsm_moduls.html', {'all_gsm_moduls': all_gsm_moduls, 
+		'form': form})
 
 
 def gsm_modul_add(request):
@@ -233,7 +247,8 @@ def gsm_modul_add(request):
 		if 'submitted' in request.GET:
 			submitted = True
 
-	return render(request, 'elektromer_app/gsm_moduls.html', {'form': form, 'submitted': submitted,})
+	return render(request, 'elektromer_app/gsm_moduls.html', {'form': form, 
+		'submitted': submitted,})
 
 	
 
@@ -252,7 +267,8 @@ def gsm_modul_update(request, pk):
 
 	
 
-	return render(request, "web_app/gsm_moduls.html", {'form': form, 'gsm_modul': gsm_modul, })
+	return render(request, "web_app/gsm_moduls.html", {'form': form, 
+		'gsm_modul': gsm_modul, })
 
 
 
@@ -268,11 +284,79 @@ def gsm_modul_delete(request, pk):
 
 
 
-def flat(request):
+def flat(request, pk):
 
-	all_flats = Flat.objects.all()
+	flat = Flat.objects.get(id=pk)
+	form = FlatForm(instance=flat)
 
-	return render (request, 'elektromer_app/flat.html', {'all_flats': all_flats})
+	return render (request, 'elektromer_app/flat.html', {'flat': flat, 
+		'form': form,})
+
+
+def flats(request):
+
+	all_flats = Flat.objects.all().order_by('svj')
+	form = FlatForm()
+
+	return render (request, 'elektromer_app/flats.html', {'all_flats': all_flats, 
+		'form': form,})
+
+
+
+
+def flat_add(request):
+
+	submitted=False
+	
+	if request.method == 'POST':
+		form=FlatForm(request.POST)
+
+		if form.is_valid():
+			form.save()
+			messages.success(request,("Bytová jednotka byla úspěšně přidána."))
+
+		else:
+			messages.error(request, ("Zkontrolujte prosím údaje zda jsou správné"))
+
+			return redirect('flat')
+
+	else:
+	
+		form = FlatForm()
+		if 'submitted' in request.GET:
+			submitted = True
+
+
+	return render(request, 'elektromer_app/flat.html', {'form': form, 
+		'submitted': submitted,})
+
+
+def flat_update(request):	
+
+	flat = Flat.objects.get(id=pk)
+	
+	form = FlatForm(request.POST, instance=flat)
+
+	if form.is_valid():
+		form.save()
+		messages.success(request, ('Informace o Bytové jednotce byly změněny.'))
+
+		return redirect("flat")
+
+	
+
+	return render(request, "web_app/flat.html", {'form': form, 
+		'flat': flat, })
+
+
+
+
+def flat_delete(request, pk):
+	
+	flat = Flat.objects.get(id=pk)
+	flat.delete()
+	messages.success(request,("Bytová jednotka byla úspěšně smazána."))
+	return redirect('flat')
 
 
 
@@ -364,7 +448,7 @@ def sub_electrometer(request, pk):
 
 def sub_electrometers(request):
 
-	all_sub_electrometers = Sub_electrometer.objects.all()
+	all_sub_electrometers = Sub_electrometer.objects.all().order_by('svj')
 
 	form = Sub_electrometerForm()
 
@@ -472,7 +556,8 @@ def solar_electrometer_add(request):
 		if 'submitted' in request.GET:
 			submitted = True
 
-	return render(request, 'elektromer_app/solar_electrometers.html', {'form': form, 'submitted': submitted})
+	return render(request, 'elektromer_app/solar_electrometers.html', {'form': form, 
+		'submitted': submitted})
 
 
 
@@ -491,7 +576,8 @@ def solar_electrometer_update(request, pk):
 
 	
 
-	return render(request, "web_app/solar_electrometers.html", {'form': form, 'solar_elektrometer': solar_electrometer, })
+	return render(request, "web_app/solar_electrometers.html", {'form': form, 
+		'solar_elektrometer': solar_electrometer, })
 
 
 
@@ -506,11 +592,32 @@ def solar_electrometer_delete(request, pk):
 	
 
 
-def balance_main(request):
+def balance_main(request, pk):
 
-	all_main_balance = Balance_main.objects.all()
+	balance_main = Balance_main.objects.get(id=pk)
+
 	
-	return render (request, 'elektromer_app/balance_main.html', {'all_main_balance': all_main_balance, })
+	form = Balance_mainForm(instance=balance_main)
+
+	return render (request, 'elektromer_app/balance_main.html', {'balance_main': balance_main, 
+		'form': form,})
+
+
+
+
+
+def balances_main(request):
+
+	
+
+	all_balances_main = Balance_main.objects.all()
+
+	
+	
+	form = Balance_mainForm()
+	
+	return render (request, 'elektromer_app/balances_main.html', {'all_balances_main': all_balances_main, 
+		'form': form, })
 
 
 
@@ -527,7 +634,7 @@ def balance_main_add(request):
 			
 			messages.error(request, ("Zkontrolujte prosím údaje zda jsou správné"))
 		
-		return redirect("balance_main")
+		return redirect("balances_main")
 
 	else:
 	
@@ -535,7 +642,8 @@ def balance_main_add(request):
 		if 'submitted' in request.GET:
 			submitted = True
 
-	return render(request, 'elektromer_app/balance_main.html', {'form': form, 'submitted': submitted,})
+	return render(request, 'elektromer_app/balances_main.html', {'form': form, 
+		'submitted': submitted,})
 
 
 
@@ -549,9 +657,10 @@ def balance_main_update(request, pk):
 		form.save()
 		messages.success(request, ('Informace o stavu Hlavního elektroměru byly změněny.'))
 
-		return redirect('balance_main')
+		return redirect('balances_main')
 
-	return render(request, "web_app/balance_main.html", {'form': form, 'balance_main': balance_main,})
+	return render(request, "web_app/balances_main.html", {'form': form, 
+		'balance_main': balance_main,})
 
 
 
@@ -560,17 +669,181 @@ def balance_main_delete(request, pk):
 	balance_main = Balance_main.objects.get(id=pk)
 	balance_main.delete()
 	messages.success(request,("Stav Hlavního elektroměru byl úspěšně smazán."))
-	return redirect("balance_main")
+	return redirect("balances_main")
 
 	
 	
 
+def balance_sub(request, pk):
 
-"""
-def balance_sub(request):
-	return render (request, 'elektromer_app/balance_sub.html', {})
+	balance_sub = Balance_sub.objects.get(id=pk)
+
+	
+	form = Balance_subForm(instance=balance_sub)
+
+	return render (request, 'elektromer_app/balance_sub.html', {'balance_sub': balance_sub, 
+		'form': form,})
 
 
-def balance_solar(request):
-	return render (request, 'elektromer_app/balance_solar.html', {})
-"""
+
+
+
+def balances_sub(request):
+
+	
+
+	all_balances_sub = Balance_sub.objects.all()
+
+	
+	
+	form = Balance_subForm()
+	
+	return render (request, 'elektromer_app/balances_sub.html', {'all_balances_sub': all_balances_sub, 
+		'form': form, })
+
+
+
+def balance_sub_add(request):	
+	submitted=False
+	if request.method == 'POST':
+		form = Balance_subForm(request.POST)
+
+		if form.is_valid():
+			form.save()
+			messages.success(request,("Stav Podružného elektroměru byl úspěšně přidán."))
+
+		else:
+			
+			messages.error(request, ("Zkontrolujte prosím údaje zda jsou správné"))
+		
+		return redirect("balances_sub")
+
+	else:
+	
+		form = Balance_subForm()
+		if 'submitted' in request.GET:
+			submitted = True
+
+	return render(request, 'elektromer_app/balances_sub.html', {'form': form, 
+		'submitted': submitted,})
+
+
+
+
+def balance_sub_update(request, pk):
+
+	balance_sub = Balance_sub.objects.get(id=pk)
+	form = Balance_subForm(request.POST, instance=balance_sub)
+
+	if form.is_valid():
+		form.save()
+		messages.success(request, ('Informace o stavu Podružném elektroměru byly změněny.'))
+
+		return redirect('balances_sub')
+
+	return render(request, "web_app/balances_sub.html", {'form': form, 
+		'balance_sub': balance_sub,})
+
+
+
+def balance_sub_delete(request, pk):
+	
+	balance_sub = Balance_sub.objects.get(id=pk)
+	balance_sub.delete()
+	messages.success(request,("Stav Podružného elektroměru byl úspěšně smazán."))
+	return redirect("balances_sub")
+
+
+
+
+
+def balance_solar(request, pk):
+
+	balance_solar = Balance_solar.objects.get(id=pk)
+
+	
+	form = Balance_solarForm(instance=balance_solar)
+
+	return render (request, 'elektromer_app/balance_solar.html', {'balance_solar': balance_solar, 
+		'form': form,})
+
+
+
+
+
+def balances_solar(request):
+
+	
+
+	all_balances_solar = Balance_solar.objects.all()
+
+	
+	
+	form = Balance_solarForm()
+	
+	return render (request, 'elektromer_app/balances_solar.html', {'all_balances_solar': all_balances_solar, 
+		'form': form, })
+
+
+
+def balance_solar_add(request):	
+	submitted=False
+	if request.method == 'POST':
+		form = Balance_solarForm(request.POST)
+
+		if form.is_valid():
+			form.save()
+			messages.success(request,("Stav Solárního elektroměru byl úspěšně přidán."))
+
+		else:
+			
+			messages.error(request, ("Zkontrolujte prosím údaje zda jsou správné"))
+		
+		return redirect("balances_solar")
+
+	else:
+	
+		form = Balance_solarForm()
+		if 'submitted' in request.GET:
+			submitted = True
+
+	return render(request, 'elektromer_app/balances_solar.html', {'form': form, 
+		'submitted': submitted,})
+
+
+
+
+def balance_solar_update(request, pk):
+
+	balance_solar = Balance_solar.objects.get(id=pk)
+	form = Balance_solarForm(request.POST, instance=balance_solar)
+
+	if form.is_valid():
+		form.save()
+		messages.success(request, ('Informace o stavu Solárního elektroměru byly změněny.'))
+
+		return redirect('balances_solar')
+
+	return render(request, "elektromer_app/balances_solar.html", {'form': form, 
+		'balance_solar': balance_solar,})
+
+
+
+def balance_solar_delete(request, pk):
+	
+	balance_solar = Balance_solar.objects.get(id=pk)
+	balance_solar.delete()
+	messages.success(request,("Stav Solárního elektroměru byl úspěšně smazán."))
+	return redirect("balances_solar")
+
+
+
+def count(request):
+
+	return render(request, "elektromer_app/count.html", {})
+
+
+
+def overview(request):
+
+	return render(request, "elektromer_app/overview.html", {})

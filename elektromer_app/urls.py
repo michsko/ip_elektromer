@@ -4,11 +4,11 @@ from . import views
 	
 urlpatterns = [
     path('', views.home, name="home"),
-    path('svj', views.svj, name="svj"),
+    path('svj/<str:pk>', views.svj, name="svj"),
+    path('svjs', views.svjs, name="svjs"),
     path('svj_add', views.svj_add, name="svj_add"),
     path('svj_update/<str:pk>', views.svj_update, name="svj_update"),
     path('svj_delete/<str:pk>', views.svj_delete, name="svj_delete"),
-
 
     path('customer/<str:pk>', views.customer, name="customer"),
     path('customers', views.customers, name="customers"),
@@ -25,8 +25,11 @@ urlpatterns = [
     path('gsm_modul_update/<str:pk>', views.gsm_modul_update, name="gsm_modul_update"),
     path('gsm_modul_delete/<str:pk>', views.gsm_modul_delete, name="gsm_modul_delete"),
 
- 
-    path('flat', views.flat, name="flat"),
+    path('flat/<str:pk>', views.flat, name="flat"),
+    path('flats', views.flats, name="flats"),
+    path('flat_add', views.flat_add, name="flat_add"),
+    path('flat_update/<str:pk>', views.flat_update, name="flat_update"),
+    path('flat_delete/<str:pk>', views.flat_delete, name="flat_delete"),
 
     path('main_electrometer/<str:pk>', views.main_electrometer, name="main_electrometer"),
     path('main_electrometers', views.main_electrometers, name="main_electrometers"),
@@ -41,19 +44,32 @@ urlpatterns = [
     path('sub_electrometer_delete/<str:pk>', views.sub_electrometer_delete, name="sub_electrometer_delete"),
 
 
-
     path('solar_electrometer/<str:pk>', views.solar_electrometer, name="solar_electrometer"),
     path('solar_electrometers', views.solar_electrometers, name="solar_electrometers"),
     path('solar_electrometer_add', views.solar_electrometer_add, name="solar_electrometer_add"),
     path('solar_electrometer_update/<str:pk>', views.solar_electrometer_update, name="solar_electrometer_update"),
     path('solar_electrometer_delete/<str:pk>', views.solar_electrometer_delete, name="solar_electrometer_delete"),
 
-    path('balance_main', views.balance_main, name="balance_main"),
+    path('balance_main/<str:pk>', views.balance_main, name="balance_main"),
+    path('balances_main', views.balances_main, name="balances_main"),
     path('balance_main_add', views.balance_main_add, name="balance_main_add"),
     path('balance_main_update/<str:pk>', views.balance_main_update, name="balance_main_update"),
-    path('balance_main_delete/<str:pk', views.balance_main_delete, name="balance_main_delete"),
+    path('balance_main_delete/<str:pk>', views.balance_main_delete, name="balance_main_delete"),
 
-    #path('balance_sub', views.balance_sub, name="balance_sub"),
-    #path('balance_solar', views.balance_solar, name="balance_solar"),
-    		
-    	]
+    path('balance_sub/<str:pk>', views.balance_sub, name="balance_sub"),
+    path('balances_sub', views.balances_sub, name="balances_sub"),
+    path('balance_sub_add', views.balance_sub_add, name="balance_sub_add"),
+    path('balance_sub_update/<str:pk>', views.balance_sub_update, name="balance_sub_update"),
+    path('balance_sub_delete/<str:pk>', views.balance_sub_delete, name="balance_sub_delete"),
+
+    path('balance_solar/<str:pk>', views.balance_solar, name="balance_solar"),
+    path('balances_solar', views.balances_solar, name="balances_solar"),
+    path('balance_solar_add', views.balance_solar_add, name="balance_solar_add"),
+    path('balance_solar_update/<str:pk>', views.balance_solar_update, name="balance_solar_update"),
+    path('balance_solar_delete/<str:pk>', views.balance_solar_delete, name="balance_solar_delete"),
+
+    path('count', views.count, name="count"),
+    path('overview', views.overview, name="overview"),
+
+
+    ]

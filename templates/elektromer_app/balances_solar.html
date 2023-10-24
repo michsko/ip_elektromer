@@ -1,0 +1,77 @@
+{% extends 'elektromer_app/base.html' %}
+	{% load static %}
+	{% block content %}
+
+	<container>
+
+<div class="container" style=" min-width: 90vw;">
+
+<br><br>
+<h1>Stav Solárních Elektroměrů</h1>
+<a type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#balanceModal"title="Timto tlačítkem můžete přidat solární elektroměr."> &nbsp; Přídat stav Solárního Elektroměru &nbsp;</a></td>
+
+
+<div class="modal" id="balanceModal" tabindex="-1">
+
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Přidat stav Solárního elektroměru </h5>
+       
+      </div>
+      <form id="solar_form" action='{% url "balance_solar_add" %}' enctype="multipart/form-data" method="POST">
+      	<div class="modal-body">
+     {% load crispy_forms_tags %}
+	
+	{% csrf_token %}
+
+    {{ form|crispy }}
+	 
+      <button type="solarmit" class="btn btn-success">Uložit</button>
+      <button type="button" class="btn btn-secondary" data-bs-dismiss='modal'>Zrušit</button>
+  </div>
+</form>
+    </div>
+  </div>
+</div>
+
+	<br><br>
+
+	<center>
+		<div class="tabulka">
+			<table class="table">
+			  <thead>
+			    <tr>
+			      <th scope="col">Podružný elektroměr ID</th>
+			      <th scope="col">Stav</th>
+			      <th scope="col">Datum od</th>
+			      <th scope="col">Datum do</th>
+			      <th scope="col">SVJ</th>
+			      <th scope="col">Informace</th>
+			      
+			      
+			    </tr>
+			  </thead>
+			  <tbody>
+			  	
+			    	<tr>
+			    		{% for balance_solar in all_balances_solar %}
+				      <td scope="row"><b>{{balance_solar.solar_electrometer}}</b></td>
+				      <td>{{balance_solar.balance}}</td>
+				      
+				      <td class="aktivni" style="color: green;"> {{balance_solar.from_date}}</td>
+				      <td class="ukoncene" style="color: green;">{{balance_solar.to_date}}</td>
+				      <td>{{balance_solar.svj}}</td>
+    				
+    				  <td><a type="button" class="btn btn-outline-primary" data-bs-toggle="tooltip" title="Timto tlačítkem můžete přejít k zobrazení tohoto stavu Solárního elektroměru." href='{% url "balance_solar" balance_solar.id %}'>&nbsp;Zobrazit &nbsp;</a></td>
+
+				    
+			    	</tr>
+			    {% endfor %}
+			  </tbody>
+			</table>
+    	</div>
+	</center>
+	</div>
+<container>
+	{% endblock %} 

@@ -9,8 +9,9 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Dashboard</a>
         </li>
+
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'svj' %}">SVJ</a>
+          <a class="nav-link" href="{% url 'svjs' %}">Všechna SVJ</a>
         </li>
         
         <li class="nav-item">
@@ -22,21 +23,47 @@
         </li>
         
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'flat' %}">Byt</a>
+          <a class="nav-link" href="{% url 'flats' %}">Byty</a>
         </li>
         
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'main_electrometers' %}">Hlavní-elektroměry</a>
-        </li>
 
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'sub_electrometers' %}">Podružné-elektroměry</a>
-        </li>
+         <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Elektroměry
+          </a>
 
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'solar_electrometers' %}">Solární-elektroměry</a>
+         <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="{% url 'main_electrometers' %}">Hlavní-elektroměry</a></li>
+          <li><a class="dropdown-item" href="{% url 'sub_electrometers' %}">Podružné-elektroměry</a></li>
+          <li><a class="dropdown-item" href="{% url 'solar_electrometers' %}">Solární-elektroměry</a></li>
+        </ul>
         </li>
        
+
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Stavy elektroměrů
+        </a>
+
+       <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="{% url 'balances_main' %}">Stav Hlavní-elektroměry</a></li>
+        <li><a class="dropdown-item"  href="{% url 'balances_sub' %}">Stav Podružné-elektroměry</a></li>
+        <li><a class="dropdown-item" href="{% url 'balances_solar' %}">Stav Solární-elektroměry</a></li>
+      </ul>
+      </li>
+        
+       <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Vyúčtování
+        </a>
+
+       <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="{% url 'overview' %}">Přehled vyúčtování</a></li>
+        <li><a class="dropdown-item"  href="{% url 'count' %}">Vytvořit vyúčtování</a></li>
+        
+      </ul>
+      </li>
+      
 
       </ul>
       <span class="navbar-text">
