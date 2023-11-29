@@ -1,167 +1,85 @@
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+<nav class="navbar navbar-light bg-light fixed-top">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#"><b>IP ELEKTROMER</b></a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <a class="navbar-brand" href="#">IP Elektroměr</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarText">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Dashboard</a>
-        </li>
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Přehledy</a>
+          </li>
 
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'svjs' %}">Všechna SVJ</a>
-        </li>
-        
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'customers' %}">Zákazníci</a>
-        </li>
-        
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'gsm_moduls' %}">GSM-moduly</a>
-        </li>
-        
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'flats' %}">Byty</a>
-        </li>
-        
-
-         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Elektroměry
-          </a>
-
-         <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="{% url 'main_electrometers' %}">Hlavní-elektroměry</a></li>
-          <li><a class="dropdown-item" href="{% url 'sub_electrometers' %}">Podružné-elektroměry</a></li>
-          <li><a class="dropdown-item" href="{% url 'solar_electrometers' %}">Solární-elektroměry</a></li>
-        </ul>
-        </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'svjs' %}">SVJ</a>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Byty</a>
+          </li>
        
 
-        <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          Stavy elektroměrů
-        </a>
+                  <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Uživatelé</a>
+          </li>
+     
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Přístroje
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarDropdown">
+              <li><a class="dropdown-item" href="{% url 'main_electrometers' %}">Hlavní elektroměry</a></li>
+              <li><a class="dropdown-item" href="#">Podružné elektroměry</a></li>
+              <li><a class="dropdown-item" href="#">Solární elektroměry</a></li>
+              <li><a class="dropdown-item" href="#">Gsm moduly</a></li>
+           
+          
+            </ul>
+          </li>
 
-       <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="{% url 'balances_main' %}">Stav Hlavní-elektroměry</a></li>
-        <li><a class="dropdown-item"  href="{% url 'balances_sub' %}">Stav Podružné-elektroměry</a></li>
-        <li><a class="dropdown-item" href="{% url 'balances_solar' %}">Stav Solární-elektroměry</a></li>
-      </ul>
-      </li>
-        
-       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          Vyúčtování
-        </a>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Správa
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarDropdown">
+              <li><a class="dropdown-item" href="#">Kalendář</a></li>
+              <li><a class="dropdown-item" href="#">Úkoly</a></li>
+              <li><a class="dropdown-item" href="#">Notifikace</a></li>
+              <li><a class="dropdown-item" href="#">Zprávy</a></li>
 
-       <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="{% url 'overview' %}">Přehled vyúčtování</a></li>
-        <li><a class="dropdown-item"  href="{% url 'count' %}">Vytvořit vyúčtování</a></li>
-        
-      </ul>
-      </li>
-      
+              <li><a class="dropdown-item" href="#">Oprávnění</a></li>
+              <li><a class="dropdown-item" href="#">Pozvánky k registraci</a></li>
+           
+          
+            </ul>
+          </li>
 
-      </ul>
-      <span class="navbar-text">
-        Uživatel: Janek Dobrovodský
-      </span>
 
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Vyúčtování</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Nastavení</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Odhlásit</a>
+          </li>
+
+
+        </ul>
+        <br><br>
+        <form class="d-flex">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
     </div>
   </div>
 </nav>
-
- <body><div class="area"></div><nav class="main-menu">
-            <ul>
-                <li>
-                    <a href="https://jbfarrow.com">
-                        <i class="fa fa-home fa-2x"></i>
-                        <span class="nav-text">
-                           Community Dashboard
-                        </span>
-                    </a>
-                  
-                </li>
-                <li class="has-subnav">
-                    <a href="#">
-                        <i class="fa fa-globe fa-2x"></i>
-                        <span class="nav-text">
-                            Global Surveyors
-                        </span>
-                    </a>
-                    
-                </li>
-                <li class="has-subnav">
-                    <a href="#">
-                       <i class="fa fa-comments fa-2x"></i>
-                        <span class="nav-text">
-                            Group Hub Forums
-                        </span>
-                    </a>
-                    
-                </li>
-                <li class="has-subnav">
-                    <a href="#">
-                       <i class="fa fa-camera-retro fa-2x"></i>
-                        <span class="nav-text">
-                            Survey Photos
-                        </span>
-                    </a>
-                   
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fa fa-film fa-2x"></i>
-                        <span class="nav-text">
-                            Surveying Tutorials
-                        </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fa fa-book fa-2x"></i>
-                        <span class="nav-text">
-                           Surveying Jobs
-                        </span>
-                    </a>
-                </li>
-                <li>
-                   <a href="#">
-                       <i class="fa fa-cogs fa-2x"></i>
-                        <span class="nav-text">
-                            Tools & Resources
-                        </span>
-                    </a>
-                </li>
-                <li>
-                   <a href="#">
-                        <i class="fa fa-map-marker fa-2x"></i>
-                        <span class="nav-text">
-                            Member Map
-                        </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                       <i class="fa fa-info fa-2x"></i>
-                        <span class="nav-text">
-                            Documentation
-                        </span>
-                    </a>
-                </li>
-            </ul>
-
-            <ul class="logout">
-                <li>
-                   <a href="#">
-                         <i class="fa fa-power-off fa-2x"></i>
-                        <span class="nav-text">
-                            Logout
-                        </span>
-                    </a>
-                </li>  
-            </ul>
-        </nav>

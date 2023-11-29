@@ -9,6 +9,8 @@
 	<div class="container" style=" min-width: 90vw;">
 <br><br>
 
+<div class="container" style="min-width: 80vw;">
+<br><br><br>
 <h1>Všechna SVJ</h1>
 
 
@@ -46,19 +48,12 @@
 			<table class="table">
 			  <thead>
 			    <tr>
-			      <th scope="col">ID</th>
-			      <th scope="col">Datum zapojení</th>
-			      <th scope="col">Datum ukončení</th>
-			      <th scope="col">Název</th>
-			      <th scope="col">Ulice</th>
-			      <th scope="col">č.o</th>
-			      <th scope="col">č.p</th>
-			      <th scope="col">Město</th>
-			      <th scope="col">Psč</th>
-			      <th scope="col">Číslo účtu</th>
-			      <th scope="col">Dodavatel el.</th>
+			      <th scope="col">Název SVJ</th>
+			      <th scope="col">Stav Hlavního elektroměru</th>
+			      <th scope="col">Podružné elektroměry</th>
+			      <th scope="col">Gsm moduly</th>
 				  <th scope="col">Počet bytů</th>
-				  <th scope="col">Informace</th>
+				
 			      
 			  
 				 
@@ -69,24 +64,18 @@
 			  <tbody>
 			  	{% for svj in all_svj %}
 			    	<tr>
-				      <th scope="row">{{svj.identification_number}}</th>
-				      <td>{{svj.from_date}}</td>
-				      {% if svj.to_date == None %}
-				      <td class="aktivni" style="color: green;"> aktivní </td>
-				      {% else %}
-				      <td class="ukoncene" style="color: red;">{{svj.to_date}}</td>
-				      {% endif %}
+				   
 				      <td>{{svj.name}}</td>
-				      <td>{{svj.address_street}}</td>
-				      <td>{{svj.address_orientation_number}}</td>
-				      <td>{{svj.address_number_subscription}}</td>
-				      <td>{{svj.address_city}}</td>
-				      <td>{{svj.address_postal_code}}</td>
-				      <td>{{svj.account_number}}</td>
-				      <td>{{svj.energy_supply}}</td>
-				      <td>{{svj.number_of_flats}}</td>
+				      <td></td>
+				       <td><a type="button" class="btn btn-outline-primary" data-bs-toggle="tooltip" title="Timto tlačítkem můžete přejít k zobrazení tohoto podružného elektroměru." href='{% url "svj" svj.id %}'>&nbsp;Elektroměry &nbsp;</a></td>
+				      
+				  	    <td><a type="button" class="btn btn-outline-primary" data-bs-toggle="tooltip" title="Timto tlačítkem můžete přejít k zobrazení tohoto podružného elektroměru." href='{% url "svj" svj.id %}'>&nbsp;Moduly &nbsp;</a></td>
+				     
+				        <td><a type="button" class="btn btn-outline-primary" data-bs-toggle="tooltip" title="Timto tlačítkem můžete přejít k zobrazení tohoto podružného elektroměru." href='{% url "svj" svj.id %}'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{svj.number_of_flats}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></td>
 
-		       <td><a type="button" class="btn btn-outline-primary" data-bs-toggle="tooltip" title="Timto tlačítkem můžete přejít k zobrazení tohoto podružného elektroměru." href='{% url "svj" svj.id %}'>&nbsp;Zobrazit &nbsp;</a></td>
+
+		       <td><a type="button" class="btn btn-outline-primary" data-bs-toggle="tooltip" title="Timto tlačítkem můžete přejít k zobrazení tohoto podružného elektroměru." href='{% url "svj" svj.id %}'>&nbsp;I &nbsp;</a></td>
+
 
 				    
 			    	</tr>
