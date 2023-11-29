@@ -20,12 +20,12 @@
           </li>
           
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Byty</a>
+            <a class="nav-link active" aria-current="page" href="{% url 'flats' %}">Byty</a>
           </li>
        
 
                   <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Uživatelé</a>
+            <a class="nav-link active" aria-current="page" href="{% url 'customers' %}">Uživatelé</a>
           </li>
      
           <li class="nav-item dropdown">
@@ -34,9 +34,9 @@
             </a>
             <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarDropdown">
               <li><a class="dropdown-item" href="{% url 'main_electrometers' %}">Hlavní elektroměry</a></li>
-              <li><a class="dropdown-item" href="#">Podružné elektroměry</a></li>
-              <li><a class="dropdown-item" href="#">Solární elektroměry</a></li>
-              <li><a class="dropdown-item" href="#">Gsm moduly</a></li>
+              <li><a class="dropdown-item" href="{% url 'sub_electrometers' %}">Podružné elektroměry</a></li>
+              <li><a class="dropdown-item" href="{% url 'solar_electrometers' %}">Solární elektroměry</a></li>
+              <li><a class="dropdown-item" href="{% url 'gsm_moduls' %}">Gsm moduly</a></li>
            
           
             </ul>

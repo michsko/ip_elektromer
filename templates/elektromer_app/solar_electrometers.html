@@ -9,6 +9,8 @@
 <div class="container" style=" min-width: 90vw;">
 
 <br><br>
+<div class="container" style="min-width: 80vw;">
+<br><br><br>
 <h1>Solární Elektroměry</h1>
 
 <a type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#solarModal"title="Timto tlačítkem můžete přidat solární elektroměr."> &nbsp; Přídat solární Elektroměr &nbsp;</a></td>
@@ -47,11 +49,12 @@
 			<table class="table">
 			  <thead>
 			    <tr>
-			      <th scope="col">ID</th>
+			        <th scope="col">SVJ</th>
 			      <th scope="col">Datum zapojení</th>
 			      <th scope="col">Datum odpojení</th>
-			      <th scope="col">SVJ</th>
+			      <th scope="col">ID</th>
 			      <th scope="col">Gsm modul</th>
+			    
 			      <th scope="col">Informace</th>
 			     
 			    </tr>
@@ -59,7 +62,7 @@
 			  <tbody>
 			  	{% for solar_electrometer in all_solar_electrometers %}
 			    	<tr>
-				      <td scope="row"><b>{{solar_electrometer.identification_number}}</b></td>
+				      <td scope="row"><b>{{solar_electrometer.svj}}</b></td>
 				      <td>{{solar_electrometer.from_date}}</td>
 
 				      {% if solar_electrometer.to_date == None %}
@@ -68,7 +71,7 @@
 				      <td class="ukoncene" style="color: red;">{{solar_electrometer.to_date}}</td>
 				      {% endif %}
 
-				      <td>{{solar_electrometer.svj}}</td>
+				      <td>{{solar_electrometer.identification_number}}</td>
 				      <td>{{solar_electrometer.gsm_modul}}</td>
 				     
 

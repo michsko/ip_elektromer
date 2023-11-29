@@ -8,6 +8,9 @@
 	<div class="container" style=" min-width: 90vw;">
 
 <br><br>
+
+<div class="container" style="min-width: 80vw;">
+<br><br><br>
 <h1>Hlavní Elektroměr</h1>
 <br><br><br>
 	<center>
@@ -16,10 +19,9 @@
 			  <thead>
 			    <tr>
 
-			      <th scope="col">ID</th>
-			      <th scope="col">Datum zapojení</th>
-			      <th scope="col">Datum odpojení</th>
 			      <th scope="col">SVJ</th>
+			      <th scope="col">Datum zapojení</th>
+			      <th scope="col">Identifikator</th>
 			      <th scope="col">upravit</th>
 			      <th scope="col">smazat</th>
 			     
@@ -28,16 +30,10 @@
 			  <tbody>
 			  	
 			    	<tr>
-				      <td scope="row"><b>{{main_electrometer.identification_number}}<b></td>
+			    	        
+			    	  <td>{{main_electrometer.svj}}</td>
 				      <td>{{main_electrometer.from_date}}</td>
-
-				      {% if main_electrometer.to_date == None %}
-				      <td class="aktivni" style="color: green;"> aktivní </td>
-				      {% else %}
-				      <td class="ukoncene" style="color: red;">{{main_electrometer.to_date}}</td>
-				      {% endif %}
-
-				      <td>{{main_electrometer.svj}}</td>
+				      <td scope="row"><b>{{main_electrometer.identification_number}}<b></td>
 
 				       <td><button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#upravitModal" title="Timto tlačítkem můžete změnit informace o tomto hlavním elektroměru." href=''>&nbsp; Upravit &nbsp;</button></td>
 

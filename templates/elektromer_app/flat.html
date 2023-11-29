@@ -9,6 +9,8 @@
 	<div class="container" style=" min-width: 90vw;">
 
 <br><br>
+<div class="container" style="min-width: 80vw;">
+<br><br><br>
 	<h1>Byt</h1>
 
 <a type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#flatModal"title="Timto tlačítkem můžete přidat Bytovou jednotku."> &nbsp; Přídat Bytovou jednotku &nbsp;</a></td>
@@ -45,13 +47,14 @@
 			<table class="table">
 			  <thead>
 			    <tr>
-			      <th scope="col">Byt č.</th>
-			      <th scope="col">Datum zapojení</th>
 			      <th scope="col">SVJ</th>
+			      <th scope="col">Byt č.</th>
+			    
+			      <th scope="col">Stav</th>
 			      <th scope="col">Gsm modul</th>
-			      <th scope="col">Majitel</th>
-			      <th scope="col">Majitel od</th>
-			      <th scope="col">Majitel do</th>
+			      <th scope="col">Majitel bytu</th>
+			      <th scope="col">Email</th>
+			      <th scope="col">Telefon</th>
 			      <th scope="col">upravit</th>
 			      <th scope="col">smazat</th>
 			   
@@ -60,18 +63,14 @@
 			  <tbody>
 			  	
 			    	<tr>
-				      <th scope="row">{{flat.flat_number}}</th>
-				      <td>{{flat.from_date}}</td>
-				      <td>{{flat.svj}}</td>
+				      <th scope="row">{{flat.svj}}</th>
+				      <td>{{flat.flat_number}}</td>
+				      <td></td>
 				      <td>{{flat.gsm_modul}}</td>
 				      <td>{{flat.owner}}</td>
-				       <td>{{flat.owner_from_date}}</td>
-				       {% if flat.owner_to_date == None %}
-				      <td class="aktivni" style="color: green;"> je majitel </th>
-				      {% else %}
-				      <td class="ukoncene" style="color: red;">{{svj.to_date}}</td>
-				      {% endif %}
-  					 
+				      <td>{{flat.owner}}</td>
+				      <td>{{flat.owner}}</td>
+				       
 
   					  <td><button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#upravitModal" title="Timto tlačítkem můžete změnit informace o tomto gsm modulu." href=''>&nbsp; Upravit &nbsp;</button></td>
 

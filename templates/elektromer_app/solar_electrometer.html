@@ -9,6 +9,8 @@
 <div class="container" style=" min-width: 90vw;">
 
 <br><br>
+<div class="container" style="min-width: 80vw;">
+<br><br><br>
 <h1>Solární Elektroměr</h1>
 
 	<br><br>
@@ -42,10 +44,10 @@
 			<table class="table">
 			  <thead>
 			    <tr>
-			      <th scope="col">ID</th>
+			      <th scope="col">SVJ</th>
 			      <th scope="col">Datum zapojení</th>
 			      <th scope="col">Datum odpojení</th>
-			      <th scope="col">SVJ</th>
+			      <th scope="col">ID</th>
 			      <th scope="col">Gsm modul</th>
 			      <th scope="col">upravit</th>
 			      <th scope="col">smazat</th>
@@ -55,7 +57,7 @@
 			  <tbody>
 			  	
 			    	<tr>
-				      <td scope="row"><b>{{solar_electrometer.identification_number}}</b></td>
+				      <td scope="row"><b>{{solar_electrometer.svj}}</b></td>
 				      <td>{{solar_electrometer.from_date}}</td>
 
 				      {% if solar_electrometer.to_date == None %}
@@ -64,7 +66,7 @@
 				      <td class="ukoncene" style="color: red;">{{svj.to_date}}</td>
 				      {% endif %}
 
-				      <td>{{solar_electrometer.svj}}</td>
+				      <td>{{solar_electrometer.identification_number}}</td>
 				      <td>{{solar_electrometer.gsm_modul}}</td>
 				      
   					  <td><a type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#upravitModal" title="Timto tlačítkem můžete změnit informace o tomto solárním elektroměru.">&nbsp; Upravit &nbsp;</a></td>
