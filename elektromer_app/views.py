@@ -22,6 +22,7 @@ from .forms import Balance_mainForm
 from .forms import Balance_subForm
 from .forms import Balance_solarForm
 from .forms import FlatForm
+from .decorators import unauthenticated_user, allowed_users
 # Create your views here.
 
 
@@ -318,7 +319,7 @@ def flat_add(request):
 		else:
 			messages.error(request, ("Zkontrolujte prosím údaje zda jsou správné"))
 
-			return redirect('flat')
+			return redirect('flats')
 
 	else:
 	
@@ -355,8 +356,8 @@ def flat_delete(request, pk):
 	
 	flat = Flat.objects.get(id=pk)
 	flat.delete()
-	messages.success(request,("Bytová jednotka byla úspěšně smazána."))
-	return redirect('flat')
+	messages.sucgcess(request,("Bytová jednotka byla úspěšně smazána."))
+	return redirect('flats')
 
 
 
