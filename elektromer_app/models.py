@@ -1,5 +1,6 @@
 from django.db import models
 from simple_history.models import HistoricalRecords
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -36,7 +37,7 @@ class Svj(models.Model):
 
 class Customer(models.Model):
 
-
+	user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
 	name = models.CharField(max_length=255, null=False)
 	surname = models.CharField(max_length=255, null=False)
 	phone = models.CharField(max_length=255, null=False)

@@ -1,5 +1,7 @@
 from django import forms
 from django.forms import ModelForm
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 from .models import Svj
 from .models import Customer
 from .models import Gsm_modul
@@ -12,28 +14,82 @@ from .models import Balance_sub
 from .models import Balance_solar
 
 
-class SvjForm(ModelForm):
+
+
+class Balance_mainForm(ModelForm):
 	class Meta:
-		model = Svj
+		model = Balance_main
 		fields = '__all__'
 
 
-		labels = {'identification_number': 'Identifikátor',
-				  'from_date':'Datum založení',
-				  'to_date' : 'Datum ukončení',
-				  'name' : 'Název',
-				  'address_street': 'Ulice', 
-				  'address_orientation_number': 'číslo orientační', 
-				  'address_number_subscription': 'číslo popisné',
-				  'address_city': 'Město',
-				  'address_postal_code': 'PSČ', 
-				  'account_number': 'Číslo účtu',
-				  'energy_supply' : 'Dodavatel',
-				  'number_of_flats': 'Počet bytů',
+
+		labels = {'balance': 'stav',
+				  'from_date':'datum založení',
+				  'to_date' : 'datum odpojení',
 
 					}
 
 
+		widgets = {
+		
+		'balance': forms.NumberInput(attrs={'class': 'form-control', 'placeholder':'e.g. 1234567.123',}), 
+		'from_date': forms.DateInput(attrs={'class': 'form-control', 'placeholder': 'Datum založení: (DD.MM.RRRR)',}),
+		'to_date': forms.DateInput(attrs={'class': 'form-control', 'placeholder': 'Datum odpojení: (DD.MM.RRRR)',}), 
+
+		'svj': forms.Select(attrs={'class': 'form-control'}), 
+		
+		}
+
+
+class Balance_subForm(ModelForm):
+	class Meta:
+		model = Balance_sub
+		fields = '__all__'
+
+
+
+		labels = {'balance': 'stav',
+				  'from_date':'datum založení',
+				  'to_date' : 'datum odpojení',
+
+					}
+
+
+		widgets = {
+		
+		'balance': forms.NumberInput(attrs={'class': 'form-control', 'placeholder':'e.g. 1234567.123',}), 
+		'from_date': forms.DateInput(attrs={'class': 'form-control', 'placeholder': 'Datum založení: (DD.MM.RRRR)',}),
+		'to_date': forms.DateInput(attrs={'class': 'form-control', 'placeholder': 'Datum odpojení: (DD.MM.RRRR)',}), 
+
+		'svj': forms.Select(attrs={'class': 'form-control'}), 
+		
+		}
+
+
+class Balance_solarForm(ModelForm):
+	class Meta:
+		model = Balance_solar
+		
+		fields = '__all__'
+
+
+
+		labels = {'balance': 'stav',
+				  'from_date':'datum založení',
+				  'to_date' : 'datum odpojení',
+
+					}
+
+
+		widgets = {
+		
+		'balance': forms.NumberInput(attrs={'class': 'form-control', 'placeholder':'e.g. 1234567.123',}), 
+		'from_date': forms.DateInput(attrs={'class': 'form-control', 'placeholder': 'Datum založení: (DD.MM.RRRR)',}),
+		'to_date': forms.DateInput(attrs={'class': 'form-control', 'placeholder': 'Datum odpojení: (DD.MM.RRRR)',}), 
+
+		'svj': forms.Select(attrs={'class': 'form-control'}), 
+		
+		}
 
 class CustomerForm(ModelForm):
 	class Meta:
@@ -69,30 +125,6 @@ class CustomerForm(ModelForm):
 
 
 
-class Gsm_modulForm(ModelForm):
-	class Meta:
-		model = Gsm_modul
-		fields = '__all__'
-
-		labels = {'identification_number': 'Identifikátor',
-				  'from_date':'datum založení',
-				  'to_date' : 'datum odpojení',
-				  
-					}
-
-
-		widgets = {
-		
-		'identification_number': forms.TextInput(attrs={'class': 'form-control', 'placeholder':'e.g. solar_x',}), 
-		'from_date': forms.DateInput(attrs={'class': 'form-control', 'placeholder': 'Datum založení: (DD.MM.RRRR)',}),
-		'to_date': forms.DateInput(attrs={'class': 'form-control', 'placeholder': 'Datum odpojení: (DD.MM.RRRR)',}), 
-		
-		'svj': forms.Select(attrs={'class': 'form-control'}), 
-		
-		}
-
-
-
 
 
 class FlatForm(ModelForm):
@@ -124,6 +156,33 @@ class FlatForm(ModelForm):
 		'svj': forms.Select(attrs={'class': 'form-control'}), 
 		
 		}
+
+
+
+
+class Gsm_modulForm(ModelForm):
+	class Meta:
+		model = Gsm_modul
+		fields = '__all__'
+
+		labels = {'identification_number': 'Identifikátor',
+				  'from_date':'datum založení',
+				  'to_date' : 'datum odpojení',
+				  
+					}
+
+
+		widgets = {
+		
+		'identification_number': forms.TextInput(attrs={'class': 'form-control', 'placeholder':'e.g. solar_x',}), 
+		'from_date': forms.DateInput(attrs={'class': 'form-control', 'placeholder': 'Datum založení: (DD.MM.RRRR)',}),
+		'to_date': forms.DateInput(attrs={'class': 'form-control', 'placeholder': 'Datum odpojení: (DD.MM.RRRR)',}), 
+		
+		'svj': forms.Select(attrs={'class': 'form-control'}), 
+		
+		}
+
+
 
 
 
@@ -200,77 +259,29 @@ class Solar_electrometerForm(ModelForm):
 		}
 		
 
-class Balance_mainForm(ModelForm):
+
+class SvjForm(ModelForm):
 	class Meta:
-		model = Balance_main
+		model = Svj
 		fields = '__all__'
 
 
-
-		labels = {'balance': 'stav',
-				  'from_date':'datum založení',
-				  'to_date' : 'datum odpojení',
+		labels = {'identification_number': 'Identifikátor',
+				  'from_date':'Datum založení',
+				  'to_date' : 'Datum ukončení',
+				  'name' : 'Název',
+				  'address_street': 'Ulice', 
+				  'address_orientation_number': 'číslo orientační', 
+				  'address_number_subscription': 'číslo popisné',
+				  'address_city': 'Město',
+				  'address_postal_code': 'PSČ', 
+				  'account_number': 'Číslo účtu',
+				  'energy_supply' : 'Dodavatel',
+				  'number_of_flats': 'Počet bytů',
 
 					}
 
-
-		widgets = {
-		
-		'balance': forms.NumberInput(attrs={'class': 'form-control', 'placeholder':'e.g. 1234567.123',}), 
-		'from_date': forms.DateInput(attrs={'class': 'form-control', 'placeholder': 'Datum založení: (DD.MM.RRRR)',}),
-		'to_date': forms.DateInput(attrs={'class': 'form-control', 'placeholder': 'Datum odpojení: (DD.MM.RRRR)',}), 
-
-		'svj': forms.Select(attrs={'class': 'form-control'}), 
-		
-		}
-
-
-class Balance_subForm(ModelForm):
+class CreateUserForm(UserCreationForm):
 	class Meta:
-		model = Balance_sub
-		fields = '__all__'
-
-
-
-		labels = {'balance': 'stav',
-				  'from_date':'datum založení',
-				  'to_date' : 'datum odpojení',
-
-					}
-
-
-		widgets = {
-		
-		'balance': forms.NumberInput(attrs={'class': 'form-control', 'placeholder':'e.g. 1234567.123',}), 
-		'from_date': forms.DateInput(attrs={'class': 'form-control', 'placeholder': 'Datum založení: (DD.MM.RRRR)',}),
-		'to_date': forms.DateInput(attrs={'class': 'form-control', 'placeholder': 'Datum odpojení: (DD.MM.RRRR)',}), 
-
-		'svj': forms.Select(attrs={'class': 'form-control'}), 
-		
-		}
-
-
-class Balance_solarForm(ModelForm):
-	class Meta:
-		model = Balance_solar
-		
-		fields = '__all__'
-
-
-
-		labels = {'balance': 'stav',
-				  'from_date':'datum založení',
-				  'to_date' : 'datum odpojení',
-
-					}
-
-
-		widgets = {
-		
-		'balance': forms.NumberInput(attrs={'class': 'form-control', 'placeholder':'e.g. 1234567.123',}), 
-		'from_date': forms.DateInput(attrs={'class': 'form-control', 'placeholder': 'Datum založení: (DD.MM.RRRR)',}),
-		'to_date': forms.DateInput(attrs={'class': 'form-control', 'placeholder': 'Datum odpojení: (DD.MM.RRRR)',}), 
-
-		'svj': forms.Select(attrs={'class': 'form-control'}), 
-		
-		}
+		model = User
+		fields = ['username', 'email', 'password1', 'password2']
