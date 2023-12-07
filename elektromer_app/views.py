@@ -634,19 +634,22 @@ def overview(request):
 
 @unauthenticated_user
 def registerPage(request):
-	if request.user.is_authenticated:
-		return redirect('home')
-	else:
 
-		form = CreateUserForm()
+	form = CreateUserForm()
 
-		if request.method == 'POST':
-			form = CreateUserForm(request.POST)
-			if form.is_valid():
-				form.save()
-				user = form.cleaned_data.get('username')
-				messages.success(request, "Váš účet byl úspěšně vytvořen pro " + user)
-				return redirect('login')
+	if request.method == 'POST':
+		form = CreateUserForm(request.POST)
+		if form.is_valid():
+			user = form.save()
+			username = form.cleaned_data.get('username')
+
+			group = Group.objects.get(name='customer')
+			user.groups.add(group)
+
+			Customer.objects.create(user=user)
+
+			messages.success(request, "Váš účet byl úspěšně vytvořen pro " + user)
+			return redirect('login')
 
 	return render(request, 'elektromer_app/register.html',{'form': form,})
 
