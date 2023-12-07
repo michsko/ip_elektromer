@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'elektromer_app',
+    'elektromer_app.apps.ElektromerAppConfig',
     'simple_history',
     'crispy_forms',
     'crispy_bootstrap5',

@@ -643,12 +643,7 @@ def registerPage(request):
 			user = form.save()
 			username = form.cleaned_data.get('username')
 
-			group = Group.objects.get(name='customer')
-			user.groups.add(group)
-
-			Customer.objects.create(user=user)
-
-			messages.success(request, "Váš účet byl úspěšně vytvořen pro " + user)
+			messages.success(request, "Váš účet byl úspěšně vytvořen pro " + username)
 			return redirect('login')
 
 	return render(request, 'elektromer_app/register.html',{'form': form,})
