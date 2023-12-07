@@ -44,6 +44,7 @@ urlpatterns = [
     path('gsm_modul_delete/<str:pk>', views.gsm_modul_delete, name="gsm_modul_delete"),
 
     path('login', views.loginPage, name='login'),
+    path('logout', views.logoutUser, name='logout'),
 
     path('main_electrometer/<str:pk>', views.main_electrometer, name="main_electrometer"),
     path('main_electrometers', views.main_electrometers, name="main_electrometers"),
@@ -54,7 +55,7 @@ urlpatterns = [
     #path('chairman', views.chairman, name="chairman"),
     #path('sub_chairman', views.sub_chairman, name="sub_chairman"),
     path('overview', views.overview, name="overview"),
-    
+
     path('register', views.registerPage, name='register'),
 
     path('solar_electrometer/<str:pk>', views.solar_electrometer, name="solar_electrometer"),
@@ -75,7 +76,7 @@ urlpatterns = [
     path('svj_update/<str:pk>', views.svj_update, name="svj_update"),
     path('svj_delete/<str:pk>', views.svj_delete, name="svj_delete"),
 
-   
+    path('user', views.userPage, name="user"), 
     
 
 

@@ -6,7 +6,7 @@
     </button>
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
       <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
+        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Uživatel: {{request.user}}</h5>
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body">
@@ -14,11 +14,11 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="#">Přehledy</a>
           </li>
-
+          {% if request.user.is_staff %}
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{% url 'svjs' %}">SVJ</a>
           </li>
-          
+          {% endif %}
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{% url 'flats' %}">Byty</a>
           </li>
@@ -69,16 +69,12 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Odhlásit</a>
+            <br><br><br><br>
+            <a class="nav-link active" aria-current="page" href="{% url 'logout' %}">Odhlásit</a>
           </li>
-
-
-        </ul>
-        <br><br>
-        <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
+        
+        
+      </ul>
       </div>
     </div>
   </div>

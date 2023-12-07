@@ -1,0 +1,48 @@
+
+	
+{% extends 'elektromer_app/base.html' %}
+	{% load static %}
+	{% block content %}
+	
+
+<container>
+
+	<div class="container" style=" min-width: 90vw;">
+
+<br><br>
+<div class="container" style="min-width: 80vw;">
+<br><br><br>
+	<h1>Uživatel</h1>
+
+	
+			    <tr>
+			      <th scope="col">SVJ</th>
+			      <br>
+			      <th scope="col">Username:   {{user.username}}</th>
+			      <br>
+			     
+			      <th scope="col">Jméno:     {{user.customer.name}}</th>
+			      <br>
+			      <th scope="col">Příjmení      {{user.customer.surname}}</th>
+			      <br>
+			      <th scope="col">Telefon    {{user.customer.phone}}</th>
+			      <br>
+			      <th scope="col">Email      {{user.customer.email}}</th>
+			      <br>
+			     
+			
+			
+				
+
+			<br><br><br>
+		</div>
+
+	</center>
+	</div>
+	</container>
+
+
+
+	
+
+	{% endblock %} 

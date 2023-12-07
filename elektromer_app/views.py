@@ -3,6 +3,8 @@ from django.shortcuts import redirect
 from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth.decorators import login_required
 from .models import Svj
 from .models import Customer
 from .models import Gsm_modul
@@ -29,12 +31,14 @@ from .decorators import unauthenticated_user, allowed_users
 
 
 
+
+@login_required(login_url='login')
 def home (request):
 	return render (request, 'elektromer_app/home.html', {})
 
 	
 
-
+@login_required(login_url='login')
 def balance_main(request, pk):
 
 	balance_main = Balance_main.objects.get(id=pk)
@@ -46,24 +50,18 @@ def balance_main(request, pk):
 		'form': form,})
 
 
-
-
-
+@login_required(login_url='login')
 def balances_main(request):
-
-	
 
 	all_balances_main = Balance_main.objects.all()
 
-	
-	
 	form = Balance_mainForm()
 	
 	return render (request, 'elektromer_app/balances_main.html', {'all_balances_main': all_balances_main, 
 		'form': form, })
 
 
-
+@login_required(login_url='login')
 def balance_main_add(request):	
 	submitted=False
 	if request.method == 'POST':
@@ -90,7 +88,7 @@ def balance_main_add(request):
 
 
 
-
+@login_required(login_url='login')
 def balance_main_update(request, pk):
 
 	balance_main = Balance_main.objects.get(id=pk)
@@ -107,6 +105,7 @@ def balance_main_update(request, pk):
 
 
 
+@login_required(login_url='login')
 def balance_main_delete(request, pk):
 	
 	balance_main = Balance_main.objects.get(id=pk)
@@ -115,8 +114,7 @@ def balance_main_delete(request, pk):
 	return redirect("balances_main")
 
 	
-	
-
+@login_required(login_url='login')
 def balance_sub(request, pk):
 
 	balance_sub = Balance_sub.objects.get(id=pk)
@@ -128,12 +126,8 @@ def balance_sub(request, pk):
 		'form': form,})
 
 
-
-
-
+@login_required(login_url='login')
 def balances_sub(request):
-
-	
 
 	all_balances_sub = Balance_sub.objects.all()
 
@@ -145,7 +139,7 @@ def balances_sub(request):
 		'form': form, })
 
 
-
+@login_required(login_url='login')
 def balance_sub_add(request):	
 	submitted=False
 	if request.method == 'POST':
@@ -171,8 +165,7 @@ def balance_sub_add(request):
 		'submitted': submitted,})
 
 
-
-
+@login_required(login_url='login')
 def balance_sub_update(request, pk):
 
 	balance_sub = Balance_sub.objects.get(id=pk)
@@ -188,7 +181,7 @@ def balance_sub_update(request, pk):
 		'balance_sub': balance_sub,})
 
 
-
+@login_required(login_url='login')
 def balance_sub_delete(request, pk):
 	
 	balance_sub = Balance_sub.objects.get(id=pk)
@@ -199,7 +192,7 @@ def balance_sub_delete(request, pk):
 
 
 
-
+@login_required(login_url='login')
 def balance_solar(request, pk):
 
 	balance_solar = Balance_solar.objects.get(id=pk)
@@ -211,24 +204,20 @@ def balance_solar(request, pk):
 		'form': form,})
 
 
-
-
-
+@login_required(login_url='login')
 def balances_solar(request):
-
 	
 
 	all_balances_solar = Balance_solar.objects.all()
 
-	
-	
+		
 	form = Balance_solarForm()
 	
 	return render (request, 'elektromer_app/balances_solar.html', {'all_balances_solar': all_balances_solar, 
 		'form': form, })
 
 
-
+@login_required(login_url='login')
 def balance_solar_add(request):	
 	submitted=False
 	if request.method == 'POST':
@@ -255,7 +244,7 @@ def balance_solar_add(request):
 
 
 
-
+@login_required(login_url='login')
 def balance_solar_update(request, pk):
 
 	balance_solar = Balance_solar.objects.get(id=pk)
@@ -271,7 +260,7 @@ def balance_solar_update(request, pk):
 		'balance_solar': balance_solar,})
 
 
-
+@login_required(login_url='login')
 def balance_solar_delete(request, pk):
 	
 	balance_solar = Balance_solar.objects.get(id=pk)
@@ -280,15 +269,14 @@ def balance_solar_delete(request, pk):
 	return redirect("balances_solar")
 
 
-
+@login_required(login_url='login')
 def count(request):
 
 	return render(request, "elektromer_app/count.html", {})
 
 
 
-
-
+@login_required(login_url='login')
 def customer(request, pk):
 
 	customer = Customer.objects.get(id=pk)
@@ -304,6 +292,7 @@ def customer(request, pk):
 		'flat_count': flat_count,})
 
 
+@login_required(login_url='login')
 
 def customers(request):
 
@@ -316,7 +305,7 @@ def customers(request):
 	 'form': form, })
 
 
-
+@login_required(login_url='login')
 def customer_add(request):
 	
 	submitted=False
@@ -344,7 +333,7 @@ def customer_add(request):
 
 	
 
-
+@login_required(login_url='login')
 def customer_update(request, pk):
 	
 	customer = Customer.objects.get(id=pk)
@@ -359,7 +348,7 @@ def customer_update(request, pk):
 	return render(request, 'elektromer_app/customer.html', {'form': form,})
 
 
-
+@login_required(login_url='login')
 def customer_delete(request, pk):
 	customer = Customer.objects.get(id=pk)
 	customer.delete()
@@ -367,7 +356,7 @@ def customer_delete(request, pk):
 	return redirect('customers')
 
 
-
+@login_required(login_url='login')
 def flat(request, pk):
 
 	flat = Flat.objects.get(id=pk)
@@ -376,7 +365,7 @@ def flat(request, pk):
 	return render (request, 'elektromer_app/flat.html', {'flat': flat, 
 		'form': form,})
 
-
+@login_required(login_url='login')
 def flats(request):
 
 	all_flats = Flat.objects.all().order_by('svj')
@@ -385,9 +374,7 @@ def flats(request):
 	return render (request, 'elektromer_app/flats.html', {'all_flats': all_flats, 
 		'form': form,})
 
-
-
-
+@login_required(login_url='login')
 def flat_add(request):
 
 	submitted=False
@@ -415,6 +402,7 @@ def flat_add(request):
 		'submitted': submitted,})
 
 
+@login_required(login_url='login')
 def flat_update(request):	
 
 	flat = Flat.objects.get(id=pk)
@@ -433,8 +421,7 @@ def flat_update(request):
 		'flat': flat, })
 
 
-
-
+@login_required(login_url='login')
 def flat_delete(request, pk):
 	
 	flat = Flat.objects.get(id=pk)
@@ -458,7 +445,7 @@ def sub_chairman(request):
 
 
 
-
+@login_required(login_url='login')
 def gsm_modul(request, pk):
 
 	gsm_modul = Gsm_modul.objects.get(id=pk)
@@ -468,6 +455,7 @@ def gsm_modul(request, pk):
 		'form': form, })
 
 
+@login_required(login_url='login')
 def gsm_moduls(request):
 
 	all_gsm_moduls = Gsm_modul.objects.all().order_by('svj')
@@ -476,7 +464,7 @@ def gsm_moduls(request):
 	return render (request, 'elektromer_app/gsm_moduls.html', {'all_gsm_moduls': all_gsm_moduls, 
 		'form': form})
 
-
+@login_required(login_url='login')
 def gsm_modul_add(request):
 	
 	
@@ -505,7 +493,7 @@ def gsm_modul_add(request):
 		'submitted': submitted,})
 
 	
-
+@login_required(login_url='login')
 def gsm_modul_update(request, pk):
 
 
@@ -526,7 +514,7 @@ def gsm_modul_update(request, pk):
 
 
 
-
+@login_required(login_url='login')
 def gsm_modul_delete(request, pk):
 
 	gsm_modul = Gsm_modul.objects.get(id=pk)
@@ -535,14 +523,35 @@ def gsm_modul_delete(request, pk):
 	return redirect('gsm_moduls')
 
 
+@unauthenticated_user
 def loginPage(request):
+
+	if request.method == 'POST':
+		username = request.POST.get("username")
+		password = request.POST.get('password')
+
+		user = authenticate(request, username=username, password = password)
+
+		if user is not None:
+			login(request, user)
+			return redirect("home")
+
+		else:
+			messages.info(request, "Uživatelské jméno nebo Heslo je nesprávné.")
+			return render(request, "elektromer_app/login.html")
 
 	return render(request, 'elektromer_app/login.html',{})
 
 
+@login_required(login_url='login')
+def logoutUser(request):
+
+	logout(request)
+
+	return redirect("login")
 
 
-
+@login_required(login_url='login')
 def main_electrometer(request, pk):
 
 	main_electrometer = Main_electrometer.objects.get(id=pk)
@@ -551,6 +560,7 @@ def main_electrometer(request, pk):
 	return render (request, 'elektromer_app/main_electrometer.html', {'main_electrometer': main_electrometer, 'form': form,})
 
 
+@login_required(login_url='login')
 def main_electrometers(request):
 
 	all_main_electrometers = Main_electrometer.objects.all()
@@ -559,6 +569,7 @@ def main_electrometers(request):
 	return render (request, 'elektromer_app/main_electrometers.html', {'all_main_electrometers': all_main_electrometers, 'form': form, })
 
 
+@login_required(login_url='login')
 def main_electrometer_add(request):
 
 	submitted=False
@@ -585,6 +596,7 @@ def main_electrometer_add(request):
 	return render(request, 'elektromer_app/main_electrometers.html', {'form': form, 'submitted': submitted,})
 
 
+@login_required(login_url='login')
 def main_electrometer_update(request, pk):
 
 	
@@ -604,7 +616,7 @@ def main_electrometer_update(request, pk):
 	return render(request, "web_app/main_electrometers.html", {'form': form, 'main_elektrometer': main_electrometer, })
 
 
-
+@login_required(login_url='login')
 def main_electrometer_delete(request, pk):
 	
 	main_electrometer = Main_electrometer.objects.get(id=pk)
@@ -613,19 +625,33 @@ def main_electrometer_delete(request, pk):
 	return redirect('main_electrometers')
 
 
+@login_required(login_url='login')
+def overview(request):
+
+	return render(request, "elektromer_app/overview.html", {})
+
+
+
+@unauthenticated_user
 def registerPage(request):
+	if request.user.is_authenticated:
+		return redirect('home')
+	else:
 
-	form = CreateUserForm()
+		form = CreateUserForm()
 
-	if request.method == 'POST':
-		form = CreateUserForm(request.POST)
-		if form.is_valid():
-			form.save()
+		if request.method == 'POST':
+			form = CreateUserForm(request.POST)
+			if form.is_valid():
+				form.save()
+				user = form.cleaned_data.get('username')
+				messages.success(request, "Váš účet byl úspěšně vytvořen pro " + user)
+				return redirect('login')
 
 	return render(request, 'elektromer_app/register.html',{'form': form,})
 
 
-
+@login_required(login_url='login')
 def solar_electrometer(request, pk):
 
 	solar_electrometer = Solar_electrometer.objects.get(id=pk)
@@ -634,7 +660,7 @@ def solar_electrometer(request, pk):
 	return render (request, 'elektromer_app/solar_electrometer.html', {'solar_electrometer': solar_electrometer, 'form': form, })
 
 
-
+@login_required(login_url='login')
 def solar_electrometers(request):
 
 	all_solar_electrometers = Solar_electrometer.objects.all()
@@ -644,9 +670,9 @@ def solar_electrometers(request):
 	return render (request, 'elektromer_app/solar_electrometers.html', {'all_solar_electrometers': all_solar_electrometers, 'form': form, })
 
 
+@login_required(login_url='login')
 def solar_electrometer_add(request):
 
-	
 	submitted=False
 	
 	if request.method == 'POST':
@@ -673,7 +699,7 @@ def solar_electrometer_add(request):
 
 
 
-
+@login_required(login_url='login')
 def solar_electrometer_update(request, pk):
 
 	solar_electrometer = Solar_electrometer.objects.get(id=pk)
@@ -692,7 +718,7 @@ def solar_electrometer_update(request, pk):
 		'solar_elektrometer': solar_electrometer, })
 
 
-
+@login_required(login_url='login')
 def solar_electrometer_delete(request, pk):
 	
 	solar_electrometer = Solar_electrometer.objects.get(id=pk)
@@ -702,7 +728,7 @@ def solar_electrometer_delete(request, pk):
 
 	
 
-
+@login_required(login_url='login')
 def sub_electrometer(request, pk):
 
 	sub_electrometer = Sub_electrometer.objects.get(id=pk)
@@ -711,7 +737,7 @@ def sub_electrometer(request, pk):
 	return render (request, 'elektromer_app/sub_electrometer.html', {'sub_electrometer': sub_electrometer, 'form': form,})
 
 
-
+@login_required(login_url='login')
 def sub_electrometers(request):
 
 	all_sub_electrometers = Sub_electrometer.objects.all().order_by('svj')
@@ -721,7 +747,7 @@ def sub_electrometers(request):
 	return render (request, 'elektromer_app/sub_electrometers.html', {'all_sub_electrometers': all_sub_electrometers, 'form': form})
 
 
-
+@login_required(login_url='login')
 def sub_electrometer_add(request):
 
 	submitted=False
@@ -748,7 +774,7 @@ def sub_electrometer_add(request):
 	return render(request, 'elektromer_app/sub_electrometers.html', {'form': form, 'submitted': submitted})
 
 
-
+@login_required(login_url='login')
 def sub_electrometer_update(request, pk):
 
 	sub_electrometer = Sub_electrometer.objects.get(id=pk)
@@ -768,7 +794,7 @@ def sub_electrometer_update(request, pk):
 
 
 
-
+@login_required(login_url='login')
 def sub_electrometer_delete(request, pk):
 	
 	sub_electrometer = Sub_electrometer.objects.get(id=pk)
@@ -778,8 +804,7 @@ def sub_electrometer_delete(request, pk):
 
 
 
-
-
+@login_required(login_url='login')
 def svj (request, pk):
 
 
@@ -789,6 +814,8 @@ def svj (request, pk):
 	return render (request, 'elektromer_app/svj.html', {'svj': svj, 'form': form,})
 
 
+
+@login_required(login_url='login')
 def svjs (request):
 
 	form = SvjForm()
@@ -800,7 +827,7 @@ def svjs (request):
 
 
 
-
+@login_required(login_url='login')
 def svj_add (request):
 
 	submitted=False
@@ -828,7 +855,7 @@ def svj_add (request):
 		'submitted': submitted,})
 
 	
-
+@login_required(login_url='login')
 def svj_delete (request, pk):
 
 	svj = Svj.objects.get(id=pk)
@@ -839,7 +866,7 @@ def svj_delete (request, pk):
 
 
 
-
+@login_required(login_url='login')
 def svj_update (request, pk):
 
 	svj = Svj.objects.get(id=pk)
@@ -856,8 +883,9 @@ def svj_update (request, pk):
 	
 
 
-
-
-def overview(request):
-
-	return render(request, "elektromer_app/overview.html", {})
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['customer'])
+def userPage(request):
+	
+	#orders = request.user.inhabitant.order_set.all()
+	return render(request, 'elektromer_app/user.html',{})
