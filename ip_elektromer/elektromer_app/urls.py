@@ -56,16 +56,27 @@ urlpatterns = [
     #path('chairman', views.chairman, name="chairman"),
     #path('sub_chairman', views.sub_chairman, name="sub_chairman"),
     path('overview', views.overview, name="overview"),
-
     path('register', views.registerPage, name='register'),
 
-    path('reset_password', auth_views.PasswordResetView.as_view(), name="reset_password"),
+    
 
-    path('reset_password_sent', auth_views.PasswordResetDoneView.as_view(), name="password_reset_done"),
+    path('reset_password', 
+        auth_views.PasswordResetView.as_view(template_name='elektromer_app/password_reset.html'), 
+        name="reset_password"),
+
+    path('reset_password_sent', 
+        auth_views.PasswordResetDoneView.as_view(template_name='elektromer_app/password_reset_sent.html'), 
+        name="password_reset_done"),
     
-    path('reset_password/<uidb64>/<token>', auth_views.PasswordResetConfirmView.as_view(), name="password_reset_confirm"),
+    path('reset/<uidb64>/<token>', 
+        auth_views.PasswordResetConfirmView.as_view(template_name='elektromer_app/password_reset_form'), 
+        name="password_reset_confirm"),
     
-    path('reset_password_complete', auth_views.PasswordResetCompleteView.as_view(), name="password_reset_complete"),
+    path('reset_password_complete', 
+        auth_views.PasswordResetCompleteView.as_view(template_name='elektromer_app/password_reset_done.html'), 
+        name="password_reset_complete"),
+
+    
 
     path('solar_electrometer/<str:pk>', views.solar_electrometer, name="solar_electrometer"),
     path('solar_electrometers', views.solar_electrometers, name="solar_electrometers"),
