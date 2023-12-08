@@ -166,6 +166,6 @@ EMAIL_USE_TLS = True
 
 EMAIL_USE_SSL = False
 
-EMAIL_HOST_USER = 'michalskocovsky@gmail.com'
+EMAIL_HOST_USER = ''
 
-EMAIL_HOST_PASSWORD = 'aodflwljedbnlcpn'
+EMAIL_HOST_PASSWORD = ''
