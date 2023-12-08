@@ -1,0 +1,80 @@
+{% extends 'elektromer_app/base.html' %}
+	{% load static %}
+	{% block content %}
+	
+
+
+<container>
+
+<div class="container" style=" min-width: 90vw;">
+
+<br><br>
+
+<div class="container" style="min-width: 80vw;">
+<br><br><br>
+<h1>Podružné Elektroměry</h1>
+
+<a type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#subModal" title="Timto tlačítkem můžete přidat podružný elektroměr." href=''>&nbsp; Přídat podružný Elektroměr &nbsp;</a></td>
+
+
+<div class="modal" id="subModal" tabindex="-1">
+
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Přidat podružný elektroměr </h5>
+       
+      </div>
+      <form id="solar_form" action='{% url "sub_electrometer_add" %}' enctype="multipart/form-data" method="POST">
+      	<div class="modal-body">
+     {% load crispy_forms_tags %}
+	
+	{% csrf_token %}
+
+    {{ form|crispy}}
+	 
+      <button type="submit" class="btn btn-success">Uložit</button>
+      <button type="button" class="btn btn-secondary" data-bs-dismiss='modal'>Zrušit</button>
+  </div>
+</form>
+    </div>
+  </div>
+</div>
+
+
+	<br><br>
+
+	<center>
+		<div class="tabulka">
+			<table class="table">
+			  <thead>
+			    <tr>
+			      <th scope="col">SVJ</th>
+			      <th scope="col">Byt</th>
+			      <th scope="col">Datum zapojení</th>
+			       <th scope="col">ID</th>
+			      <th scope="col">Informace</th>
+
+			      
+			    </tr>
+			  </thead>
+			  <tbody>
+			  	{% for sub_electrometer in all_sub_electrometers %}
+			    	<tr>
+				      <td scope="row"><b>{{sub_electrometer.svj}}</b></td>
+				      <td>{{sub_electrometer.flat}}</td>
+				      <td>{{sub_electrometer.from_date}}</td>				     
+				       <td>{{sub_electrometer.identification_number }}</td>
+
+				        <td><a type="button" class="btn btn-outline-primary" data-bs-toggle="tooltip" title="Timto tlačítkem můžete přejít k zobrazení tohoto podružného elektroměru." href='{% url "sub_electrometer" sub_electrometer.id %}'>&nbsp;Zobrazit &nbsp;</a></td>
+
+				    
+			    	</tr>
+			    {% endfor %}
+			  </tbody>
+			</table>
+    	</div>
+	</center>
+	</div>
+<container>
+	{% endblock %} 

@@ -1,0 +1,20 @@
+{% extends 'elektromer_app/base.html' %}
+	{% load static %}
+	{% block content %}
+
+
+	<form action="" method="POST">
+
+   {% load crispy_forms_tags %}
+	
+	{% csrf_token %}
+
+    {{ form|crispy }}
+
+    {{mark}}
+	
+	</form>
+
+	
+
+{% endblock %} 

@@ -1,0 +1,90 @@
+{% extends 'elektromer_app/base.html' %}
+	{% load static %}
+	{% block content %}
+
+	
+
+<container>
+
+	<div class="container" style=" min-width: 90vw;">
+<br><br>
+
+<div class="container" style="min-width: 80vw;">
+<br><br><br>
+<h1>Všechna SVJ</h1>
+
+
+<a type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#svjModal" title="Timto tlačítkem můžete přidat společenství vlastníků bytových jednotek." href=''>&nbsp; Přídat Společenství vlastníků &nbsp;</a></td>
+
+<div class="modal" id="svjModal" tabindex="-1">
+
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Přidat Společenství vlastníků </h5>
+       
+      </div>
+      <form id="solar_form" action='{% url "svj_add" %}' enctype="multipart/form-data" method="POST">
+      	<div class="modal-body">
+     {% load crispy_forms_tags %}
+	
+	{% csrf_token %}
+
+    {{ form|crispy}}
+	 
+      <button type="submit" class="btn btn-success">Uložit</button>
+      <button type="button" class="btn btn-secondary" data-bs-dismiss='modal'>Zrušit</button>
+  </div>
+</form>
+    </div>
+  </div>
+</div>
+
+
+<br><br><br>
+
+	<center>
+		<div class="tabulka">
+			<table class="table">
+			  <thead>
+			    <tr>
+			      <th scope="col">Název SVJ</th>
+			      <th scope="col">Stav Hlavního elektroměru</th>
+			      <th scope="col">Podružné elektroměry</th>
+			      <th scope="col">Gsm moduly</th>
+				  <th scope="col">Počet bytů</th>
+				
+			      
+			  
+				 
+
+			      
+			    </tr>
+			  </thead>
+			  <tbody>
+			  	{% for svj in all_svj %}
+			    	<tr>
+				   
+				      <td>{{svj.name}}</td>
+				       <td><a type="button" class="btn btn-outline-primary" data-bs-toggle="tooltip" title="Timto tlačítkem můžete přejít k zobrazení tohoto podružného elektroměru." href='{% url "svj" svj.id %}'>&nbsp;Hlavní Elektroměry &nbsp;</a></td>
+				      </td>
+				       <td><a type="button" class="btn btn-outline-primary" data-bs-toggle="tooltip" title="Timto tlačítkem můžete přejít k zobrazení tohoto podružného elektroměru." href='{% url "svj" svj.id %}'>&nbsp;Podružné Elektroměry &nbsp;</a></td>
+				      
+				  	    <td><a type="button" class="btn btn-outline-primary" data-bs-toggle="tooltip" title="Timto tlačítkem můžete přejít k zobrazení tohoto podružného elektroměru." href='{% url "svj" svj.id %}'>&nbsp;Moduly &nbsp;</a></td>
+				     
+				        <td><a type="button" class="btn btn-outline-primary" data-bs-toggle="tooltip" title="Timto tlačítkem můžete přejít k zobrazení tohoto podružného elektroměru." href='{% url "svj" svj.id %}'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{svj.number_of_flats}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></td>
+
+
+		       <td><a type="button" class="btn btn-outline-primary" data-bs-toggle="tooltip" title="Timto tlačítkem můžete přejít k zobrazení tohoto podružného elektroměru." href='{% url "svj" svj.id %}'>&nbsp;I &nbsp;</a></td>
+
+
+				    
+			    	</tr>
+			    {% endfor %}
+			  </tbody>
+			</table>
+    	</div>
+	</center>
+	</div>
+<container>
+	{% endblock %} 

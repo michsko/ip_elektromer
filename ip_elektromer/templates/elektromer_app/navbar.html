@@ -1,0 +1,82 @@
+<nav class="navbar navbar-light bg-light fixed-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">IP Elektroměr</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Uživatel: {{request.user}}</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Přehledy</a>
+          </li>
+          {% if request.user.is_staff %}
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'svjs' %}">SVJ</a>
+          </li>
+          {% endif %}
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'flats' %}">Byty</a>
+          </li>
+       
+
+                  <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'customers' %}">Uživatelé</a>
+          </li>
+     
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Přístroje
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarDropdown">
+              <li><a class="dropdown-item" href="{% url 'main_electrometers' %}">Hlavní elektroměry</a></li>
+              <li><a class="dropdown-item" href="{% url 'sub_electrometers' %}">Podružné elektroměry</a></li>
+              <li><a class="dropdown-item" href="{% url 'solar_electrometers' %}">Solární elektroměry</a></li>
+              <li><a class="dropdown-item" href="{% url 'gsm_moduls' %}">Gsm moduly</a></li>
+           
+          
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Správa
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarDropdown">
+              <li><a class="dropdown-item" href="#">Kalendář</a></li>
+              <li><a class="dropdown-item" href="#">Úkoly</a></li>
+              <li><a class="dropdown-item" href="#">Notifikace</a></li>
+              <li><a class="dropdown-item" href="#">Zprávy</a></li>
+
+              <li><a class="dropdown-item" href="#">Oprávnění</a></li>
+              <li><a class="dropdown-item" href="#">Pozvánky k registraci</a></li>
+           
+          
+            </ul>
+          </li>
+
+
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Vyúčtování</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Nastavení</a>
+          </li>
+
+          <li class="nav-item">
+            <br><br><br><br>
+            <a class="nav-link active" aria-current="page" href="{% url 'logout' %}">Odhlásit</a>
+          </li>
+        
+        
+      </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+<br><br>

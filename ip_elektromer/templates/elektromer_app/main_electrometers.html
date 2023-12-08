@@ -1,0 +1,86 @@
+{% extends 'elektromer_app/base.html' %}
+	{% load static %}
+	{% block content %}
+	
+
+
+<container>
+
+<div class="container" style=" min-width: 90vw;">
+
+<br><br>
+
+<div class="container" style="min-width: 80vw;">
+<br><br><br>
+<h1>Hlavní Elektroměry</h1>
+
+<a type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#mainModal"  title="Timto tlačítkem můžete přidat hlavní elektroměr." href=''>&nbsp; Přídat hlavní Elektroměr &nbsp;</a></td>
+
+<div class="modal" id="mainModal" tabindex="-1">
+
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Přidat Hlavní elektroměr </h5>
+       
+      </div>
+      <form id="solar_form" action='{% url "main_electrometer_add" %}' enctype="multipart/form-data" method="POST">
+      	<div class="modal-body">
+     {% load crispy_forms_tags %}
+	
+	{% csrf_token %}
+
+    {{ form|crispy}}
+	 
+      <button type="submit" class="btn btn-success">Uložit</button>
+      <button type="button" class="btn btn-secondary" data-bs-dismiss='modal'>Zrušit</button>
+  </div>
+</form>
+    </div>
+  </div>
+</div>
+
+	<br><br>
+	<center>
+		<div class="tabulka">
+			
+
+			<table class="table">
+			  <thead>
+			    <tr>
+
+			      <th scope="col">Identifikace</th>
+			      <th scope="col">Datum zapojení</th>
+			      <th scope="col">Datum odpojení</th>
+			      <th scope="col">SVJ</th>
+			      <th scope="col">Informace</th>
+			      
+			    </tr>
+			  </thead>
+			  <tbody>
+			  	{% for main_electrometer in all_main_electrometers %}
+			    	<tr>
+				      <td scope="row"><b>{{main_electrometer.identification_number}}</b></td>
+				      <td>{{main_electrometer.from_date}}</td>
+
+				      {% if main_electrometer.to_date == None %}
+				      <td class="aktivni" style="color: green;"> aktivní </td>
+				      {% else %}
+				      <td class="ukoncene" style="color: red;">{{main_electrometer.to_date}}</td>
+				      {% endif %}
+
+				      <td>{{main_electrometer.svj}}</td>
+
+				      <td><a type="button" class="btn btn-outline-primary" data-bs-toggle="tooltip" title="Timto tlačítkem můžete přejít k zobrazení tohoto hlavního elektroměru." href='{% url "main_electrometer" main_electrometer.id %}'>&nbsp;Zobrazit &nbsp;</a></td>
+				
+				      
+			    	</tr>
+			    {% endfor %}
+			  </tbody>
+			</table>
+    	</div>
+	</center>
+	</div>
+<container>
+
+	{% endblock %} 

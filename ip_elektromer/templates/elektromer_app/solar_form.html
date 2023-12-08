@@ -1,0 +1,15 @@
+
+{% block content %}
+	
+<form id="solar_form" role='form' enctype="multipart/form-data" method="POST">
+	{% load crispy_forms_tags %}
+	
+	{% csrf_token %}
+
+    {{ form|crispy}}
+
+      <input type="submit" class="btn btn-success" value='Uložit'>
+	
+	</form>
+
+	{% endblock %}
