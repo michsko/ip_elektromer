@@ -61,14 +61,19 @@ urlpatterns = [
 
 
 
-    path('reset_password',auth_views.PasswordResetView.as_view(), 
-        name="reset_password"),
-    path('reset_password_sent',auth_views.PasswordResetDoneView.as_view(),
+    path('reset_password',
+        auth_views.PasswordResetView.as_view(template_name="elektromer_app/password_reset.html"), 
+        name="password_reset"),
+
+    path('reset_password_sent',
+        auth_views.PasswordResetDoneView.as_view(template_name="elektromer_app/password_reset_sent.html"),
         name="password_reset_done"),
+    
     path('reset/<uidb64>/<token>',
         auth_views.PasswordResetConfirmView.as_view(), 
         name='password_reset_confirrm'),
-    path('reset_password_complete',auth_views.PasswordResetCompleteView.as_view(),
+    
+    path('reset_password_complete',auth_views.PasswordResetCompleteView.as_view(template_name="elektromer_app/password_reset_done.html"),
         name="password_reset_complete"),
 
    
