@@ -270,6 +270,12 @@ def balance_solar_delete(request, pk):
 
 
 @login_required(login_url='login')
+def calendar(request):
+
+	return render(request, 'elektromer_app/calendar.html', {})
+
+
+@login_required(login_url='login')
 def count(request):
 
 	return render(request, "elektromer_app/count.html", {})
