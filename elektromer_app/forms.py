@@ -4,18 +4,19 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from .models import Svj
 from .models import Customer
+from .models import Event
 from .models import Gsm_modul
 from .models import Flat
-from .models import Main_electrometer
-from .models import Sub_electrometer
-from .models import Solar_electrometer
-from .models import Balance_main
-from .models import Balance_sub
-from .models import Balance_solar
+#from .models import Main_electrometer
+#from .models import Sub_electrometer
+#from .models import Solar_electrometer
+#from .models import Balance_main
+#from .models import Balance_sub
+#from .models import Balance_solar
 
 
 
-
+"""
 class Balance_mainForm(ModelForm):
 	class Meta:
 		model = Balance_main
@@ -90,6 +91,8 @@ class Balance_solarForm(ModelForm):
 		'svj': forms.Select(attrs={'class': 'form-control'}), 
 		
 		}
+"""
+
 
 class CustomerForm(ModelForm):
 	class Meta:
@@ -124,6 +127,26 @@ class CustomerForm(ModelForm):
 		}
 
 
+class EventForm(ModelForm):
+	class Meta:
+		model = Event
+		fields = '__all__'
+
+		labels = {'name':'název události',
+				  'day':'den', 
+				  'start_time': 'začátek eventu',
+				  'end_time': 'konec eventu',
+				  'notes': 'poznámky'}
+
+		widgets = {
+		'name': forms.TextInput(attrs={'class':'form-control', 'placeholder': 'Název události'}),
+		'day': forms.DateInput(attrs={'class': 'form-control', 'placeholder': 'Den události: (RRRR.MM.DD)',}), 
+		'start_time': forms.TimeInput(attrs={'class': 'form-control', 'placeholder': 'Začátek události: (HH:MM:SS)',}),
+		'end_time': forms.TimeInput(attrs={'class': 'form-control', 'placeholder': 'Konec události: (HH:MM:SS)',}), 
+		
+		'notes': forms.TextInput(attrs={'class': 'form-control'}),
+		
+		}
 
 
 
@@ -184,7 +207,7 @@ class Gsm_modulForm(ModelForm):
 
 
 
-
+"""
 
 class Main_electrometerForm(ModelForm):
 	class Meta:
@@ -280,6 +303,7 @@ class SvjForm(ModelForm):
 				  'number_of_flats': 'Počet bytů',
 
 					}
+"""
 
 class CreateUserForm(UserCreationForm):
 	class Meta:

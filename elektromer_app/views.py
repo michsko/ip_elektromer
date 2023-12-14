@@ -7,23 +7,25 @@ from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from .models import Svj
 from .models import Customer
+from .models import Event
 from .models import Gsm_modul
 from .models import Flat
-from .models import Main_electrometer
-from .models import Sub_electrometer
-from .models import Solar_electrometer
-from .models import Balance_main
-from .models import Balance_sub
-from .models import Balance_solar
-from .forms import SvjForm
+#from .models import Main_electrometer
+#from .models import Sub_electrometer
+#from .models import Solar_electrometer
+#from .models import Balance_main
+#from .models import Balance_sub
+#from .models import Balance_solar
+#from .forms import SvjForm
 from .forms import CustomerForm
+from .forms import EventForm
 from .forms import Gsm_modulForm
-from .forms import Main_electrometerForm
-from .forms import Sub_electrometerForm
-from .forms import Solar_electrometerForm
-from .forms import Balance_mainForm
-from .forms import Balance_subForm
-from .forms import Balance_solarForm
+#from .forms import Main_electrometerForm
+#from .forms import Sub_electrometerForm
+#from .forms import Solar_electrometerForm
+#from .forms import Balance_mainForm
+#from .forms import Balance_subForm
+#from .forms import Balance_solarForm
 from .forms import FlatForm
 from .forms import CreateUserForm
 from .decorators import unauthenticated_user, allowed_users
@@ -272,7 +274,43 @@ def balance_solar_delete(request, pk):
 @login_required(login_url='login')
 def calendar(request):
 
-	return render(request, 'elektromer_app/calendar.html', {})
+	events = Event.objects.all()
+
+	form = EventForm()
+
+	return render(request, 'elektromer_app/calendar.html', {'events': events, 'form' : form })
+
+
+
+@login_required(login_url='login')
+def calendar_event_add(request):
+
+
+	submitted=False
+
+	if request.method == "POST":
+		form = EventForm(request.POST)
+		
+		if form.is_valid():
+			form.save()
+			messages.success(request,("Event byl úspěšně přidán"))
+		
+		else:
+			messages.error(request, ("Zkontrolujte prosím údaje zda jsou správné"))
+
+		return redirect('calendar')
+	
+	else:
+
+		form = EventForm()
+		if 'submitted' in request.GET:
+			submitted = True
+
+	return render (request, "elektromer_app/calendar.html", {'form': form, 'submitted': submitted, })
+
+
+	
+
 
 
 @login_required(login_url='login')

@@ -25,6 +25,7 @@ urlpatterns = [
     path('balance_solar_delete/<str:pk>', views.balance_solar_delete, name="balance_solar_delete"),
     
     path('calendar', views.calendar, name='calendar'),
+    path('calendar_event_add', views.calendar_event_add, name='calendar_event_add'),
     path('count', views.count, name="count"),
 
     path('customer/<str:pk>', views.customer, name="customer"),

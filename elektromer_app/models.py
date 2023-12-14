@@ -12,21 +12,34 @@ from django.contrib.auth.models import User
 class Svj(models.Model):
 
 
-	identification_number = models.CharField(max_length=255, null=False)
-	from_date = models.DateField(null=False)
-	to_date = models.DateField(blank=True, null=True)
 	
-	date_created = models.DateTimeField(auto_now_add=True, null=True)
+	from_date = models.DateField(null=False)
+	
 
 	name = models.CharField(max_length=255)
 	address_street = models.CharField(max_length=255)
 	address_orientation_number = models.IntegerField(default=0, null=True, blank=True)
-	address_number_subscription= models.IntegerField(default=0)
+	address_number_subscription = models.IntegerField(null=True, blank=True)
 	address_city = models.CharField(max_length=255)
-	address_postal_code = models.IntegerField(default=0)
+	address_postal_code = models.IntegerField(null=True, blank=True)
+
+
+	date_of_creation = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+	low_form = models.CharField(max_length=255)
+
+	ico = models.CharField(max_length=255, blank=True)
+	tax_number = models.CharField(max_length=255, null=True, blank=True)
+
+
 	account_number = models.CharField(max_length=255, null=True, blank=True)
-	energy_supply = models.CharField(max_length=255)
-	number_of_flats = models.IntegerField(default=0, null=False)
+
+	email = models.EmailField(max_length=255, blank=True, null=True)
+	phone = models.CharField(max_length=255, blank=True, null=True)
+
+	active = models.BooleanField(default=True)
+	active_from = models.DateField(auto_now_add = True, null=True, blank=True)
+	active_to = models.DateField(null=True, blank=True)
+
 
 	history = HistoricalRecords()
 
@@ -61,7 +74,7 @@ class Customer(models.Model):
 		return self.name + " " + self.surname
 
 
-
+"""
 
 class Chairman(models.Model):
 
@@ -86,8 +99,56 @@ class Chairman(models.Model):
 
 	def __str__(self):
 		return str(self.customer) + " -- " + str(self.svj)
+"""
+
+class Event(models.Model):
+	name = models.CharField(max_length=255, null=True)
+	day = models.DateField('Day of the event')
+	start_time  = models.TimeField('Starting time', )
+	end_time = models.TimeField('Ending time', )
+	notes = models.TextField('Textual Notes', blank = True, null = True)
+
+	history = HistoricalRecords()
 
 
+	def __str__(self):
+		return str(self.name) + " -- " + str(self.day)
+"""
+	class Meta:
+		verbose_name = "Scheduling"
+		verbose_name_plural = "Scheduling"
+}
+"""
+"""
+	def check_overlap(self, fixed_start, fixed_end, new_start, new_end):
+        overlap = False
+        if new_start == fixed_end or new_end == fixed_start:    #edge case
+            overlap = False
+        elif (new_start >= fixed_start and new_start <= fixed_end) or (new_end >= fixed_start and new_end <= fixed_end): #innner limits
+            overlap = True
+        elif new_start <= fixed_start and new_end >= fixed_end: #outter limits
+            overlap = True
+ 
+        return overlap
+ 
+    def get_absolute_url(self):
+        url = reverse('admin:%s_%s_change' % (self._meta.app_label, self._meta.model_name), args=[self.id])
+        return u'<a href="%s">%s</a>' % (url, str(self.start_time))
+ 
+    def clean(self):
+        if self.end_time <= self.start_time:
+            raise ValidationError('Ending times must after starting times')
+ 
+        events = Event.objects.filter(day=self.day)
+        if events.exists():
+            for event in events:
+                if self.check_overlap(event.start_time, event.end_time, self.start_time, self.end_time):
+                    raise ValidationError(
+                        'There is an overlap with another event: ' + str(event.day) + ', ' + str(
+                            event.start_time) + '-' + str(event.end_time))
+"""
+
+"""
 class Sub_chairman(models.Model):
 
 
@@ -104,7 +165,7 @@ class Sub_chairman(models.Model):
 
 	def __str__(self):
 		return str(self.customer) + " -- " + str(self.svj)
-
+"""
 
 class Gsm_modul(models.Model):
 
@@ -147,6 +208,16 @@ class Flat(models.Model):
 
 
 
+
+
+
+
+
+
+
+
+
+"""
 
 class Main_electrometer(models.Model):
 
@@ -249,3 +320,8 @@ class Balance_solar(models.Model):
 
 	def __str__(self):
 		return str(self.solar_electrometer) + " -- " + str('stav: ' + str(self.balance))
+
+
+"""
+
+
