@@ -25,7 +25,7 @@ class Svj(models.Model):
 
 
 	date_of_creation = models.DateTimeField(auto_now_add=True, null=True, blank=True)
-	low_form = models.CharField(max_length=255)
+	law_form = models.CharField(max_length=255)
 
 	ico = models.CharField(max_length=255, blank=True)
 	tax_number = models.CharField(max_length=255, null=True, blank=True)

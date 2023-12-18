@@ -9,7 +9,7 @@
 	<div class="container" style=" min-width: 90vw;">
 <br><br>
 
-<div class="container" style="min-width: 80vw;">
+<div class="container" style="min-width: 90vw;">
 <br><br><br>
 <h1>Všechna SVJ</h1>
 
@@ -49,10 +49,22 @@
 			  <thead>
 			    <tr>
 			      <th scope="col">Název SVJ</th>
-			      <th scope="col">Stav Hlavního elektroměru</th>
-			      <th scope="col">Podružné elektroměry</th>
-			      <th scope="col">Gsm moduly</th>
-				  <th scope="col">Počet bytů</th>
+			      <th scope="col">Adresa</th>
+			      <th scope="col">Info</th>
+			      <th scope="col">IČO</th>
+			      <th scope="col">DIČ</th>
+			      <th scope="col">Číslo účtu</th>
+			      <th scope="col">Email</th>
+			      <th scope="col">Telefon</th>
+			      <th scope="col">Aktivní</th>
+			      <th scope="col">od</th>
+			      <th scope="col">do</th>
+			      <th></th>
+			      <th></th>
+			      <th></th>
+			      <th></th>
+		
+			     
 				
 			      
 			  
@@ -66,17 +78,59 @@
 			    	<tr>
 				   
 				      <td>{{svj.name}}</td>
-				       <td><a type="button" class="btn btn-outline-primary" data-bs-toggle="tooltip" title="Timto tlačítkem můžete přejít k zobrazení tohoto podružného elektroměru." href='{% url "svj" svj.id %}'>&nbsp;Hlavní Elektroměry &nbsp;</a></td>
-				      </td>
-				       <td><a type="button" class="btn btn-outline-primary" data-bs-toggle="tooltip" title="Timto tlačítkem můžete přejít k zobrazení tohoto podružného elektroměru." href='{% url "svj" svj.id %}'>&nbsp;Podružné Elektroměry &nbsp;</a></td>
+				      <td>{{svj.address_street}} {{svj.address_orientation_number}} / {{svj.address_number_subscription}}, <br> {{svj.address_city}}, {{svj.address_postal_code}}</td>
 				      
-				  	    <td><a type="button" class="btn btn-outline-primary" data-bs-toggle="tooltip" title="Timto tlačítkem můžete přejít k zobrazení tohoto podružného elektroměru." href='{% url "svj" svj.id %}'>&nbsp;Moduly &nbsp;</a></td>
+				      <td>
+<a tabindex="0" class="btn btn-lg btn-danger" role="button" data-toggle="popover" data-trigger="focus" title="Dismissible popover" data-content="And here's some amazing content. It's very engaging. Right?">Dismissible popover</a>
+<div class="container">				      	
+<a href="#" title="Dismissible popover" data-toggle="popover" data-trigger="focus" data-content="Click anywhere in the document to close this popover">click
+<img src="{% static 'images/icons/info.png'%}" style="width: 35px; height: 35px;" /></a></td>
+</div>
+
+
+
+
+				      <td>{{svj.ico}}</td>
+				      <td>{{svj.tax_number}}</td>
+
+				      <td>{{svj.account_number}}
+				      <td>{{svj.email}}</td>
+				      <td>{{svj.phone}}</td>
+
+				      {% if svj.active == True %}
+				      <th style="color: green;">✔</th>
+
+				      {% else %}
+
+				      <th style="color: red;">x</th>
+
+				      {% endif %}
+				      
+
+				      <th>{{svj.active_from}}</th>
+				      
+				      {% if svj.active == False %}
+
+				      <th>{{svj.active_to}}</th>
+
+				      {% else %}
+
+				      <th> </th>
+
+				      {% endif %}
+				  
+
+				       <td><a data-bs-toggle="tooltip" title="Timto tlačítkem můžete přejít k zobrazení hlavních elektroměrech." href='{% url "svj" svj.id %}'><img src="{% static 'images/icons/meter.png' %}" style="width: 35px; height: 35px;" /></a>
+				       </td>
+				      </td>
+				       <td><a data-bs-toggle="tooltip" title="Timto tlačítkem můžete přejít k zobrazení tohoto podružného elektroměru." href='{% url "svj" svj.id %}'><img src="{% static 'images/icons/smart-meter.png' %}" style="width: 35px; height: 35px;"/></a></td>
+				      
+				  	    <td><a data-bs-toggle="tooltip" title="Timto tlačítkem můžete přejít k zobrazení tohoto gsm modulu." href='{% url "svj" svj.id %}'><img src="{% static 'images/icons/gsm.png' %}" style="width: 35px; height: 35px;"/></a></td>
 				     
-				        <td><a type="button" class="btn btn-outline-primary" data-bs-toggle="tooltip" title="Timto tlačítkem můžete přejít k zobrazení tohoto podružného elektroměru." href='{% url "svj" svj.id %}'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{svj.number_of_flats}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></td>
+				        <td><a data-bs-toggle="tooltip" title="Timto tlačítkem můžete přejít k zobrazení bytů." href='{% url "svj" svj.id %}'><img src="{% static 'images/icons/flat.png' %}" style="width: 35px; height: 35px;"/></a></td>
 
 
-		       <td><a type="button" class="btn btn-outline-primary" data-bs-toggle="tooltip" title="Timto tlačítkem můžete přejít k zobrazení tohoto podružného elektroměru." href='{% url "svj" svj.id %}'>&nbsp;I &nbsp;</a></td>
-
+		     
 
 				    
 			    	</tr>
@@ -87,4 +141,8 @@
 	</center>
 	</div>
 <container>
+
+
+
+
 	{% endblock %} 

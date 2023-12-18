@@ -16,7 +16,7 @@ from .models import Solar_electrometer
 #from .models import Balance_main
 #from .models import Balance_sub
 #from .models import Balance_solar
-#from .forms import SvjForm
+from .forms import SvjForm
 from .forms import CustomerForm
 from .forms import EventForm
 from .forms import Gsm_modulForm
