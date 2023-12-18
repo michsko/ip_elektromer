@@ -10,9 +10,9 @@ from .models import Customer
 from .models import Event
 from .models import Gsm_modul
 from .models import Flat
-#from .models import Main_electrometer
-#from .models import Sub_electrometer
-#from .models import Solar_electrometer
+from .models import Main_electrometer
+from .models import Sub_electrometer
+from .models import Solar_electrometer
 #from .models import Balance_main
 #from .models import Balance_sub
 #from .models import Balance_solar
@@ -20,9 +20,9 @@ from .models import Flat
 from .forms import CustomerForm
 from .forms import EventForm
 from .forms import Gsm_modulForm
-#from .forms import Main_electrometerForm
-#from .forms import Sub_electrometerForm
-#from .forms import Solar_electrometerForm
+from .forms import Main_electrometerForm
+from .forms import Sub_electrometerForm
+from .forms import Solar_electrometerForm
 #from .forms import Balance_mainForm
 #from .forms import Balance_subForm
 #from .forms import Balance_solarForm

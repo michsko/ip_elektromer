@@ -7,9 +7,9 @@ from .models import Customer
 from .models import Event
 from .models import Gsm_modul
 from .models import Flat
-#from .models import Main_electrometer
-#from .models import Sub_electrometer
-#from .models import Solar_electrometer
+from .models import Main_electrometer
+from .models import Sub_electrometer
+from .models import Solar_electrometer
 #from .models import Balance_main
 #from .models import Balance_sub
 #from .models import Balance_solar
@@ -207,7 +207,7 @@ class Gsm_modulForm(ModelForm):
 
 
 
-"""
+
 
 class Main_electrometerForm(ModelForm):
 	class Meta:
@@ -303,7 +303,7 @@ class SvjForm(ModelForm):
 				  'number_of_flats': 'Počet bytů',
 
 					}
-"""
+
 
 class CreateUserForm(UserCreationForm):
 	class Meta:

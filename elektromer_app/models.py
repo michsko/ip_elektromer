@@ -56,10 +56,10 @@ class Customer(models.Model):
 	phone = models.CharField(max_length=255, null=False)
 	email = models.EmailField(max_length=244, null=False)
 	address_street = models.CharField(max_length=255)
-	address_orientation_number = models.IntegerField(default=0, null=True, blank=True)
-	address_number_subscription= models.IntegerField(default=0)
+	address_orientation_number = models.IntegerField(null=True, blank=True)
+	address_number_subscription= models.IntegerField(null=True, blank=True)
 	address_city = models.CharField(max_length=255)
-	address_postal_code = models.IntegerField(default=0)
+	address_postal_code = models.IntegerField(null=True, blank=True)
 	contract_number = models.CharField(max_length=255, null=True, blank=True)
 	
 	svj = models.ManyToManyField(Svj)
@@ -194,11 +194,45 @@ class Flat(models.Model):
 	to_date = models.DateField(blank=True, null=True)
 
 	svj = models.ForeignKey(Svj, on_delete=models.SET_NULL, null=True)
-	gsm_modul = models.ForeignKey(Gsm_modul, on_delete=models.SET_NULL, null=True)
-	owner = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
-	owner_from_date = models.DateField(null=True, blank=True)
-	owner_to_date = models.DateField(blank=True, null=True)
 	
+	
+	address_street = models.CharField(max_length=255, null=True, blank=True)
+	address_number_subscription = models.IntegerField(null=True, blank=True)
+	address_orientation_number  = models.CharField(max_length=255, null=True, blank=True)
+	address_city = models.CharField(max_length=255, null=True, blank=True)
+	address_postal_code = models.IntegerField(null=True, blank=True)
+	address_okres = models.CharField(max_length=255, null=True, blank=True)
+	address_kraj = models.CharField(max_length=255, null=True, blank=True)
+
+	
+	facturation_address_street = models.CharField(max_length=255, null=True, blank=True)
+	facturation_address_number_subscription = models.IntegerField(null=True, blank=True)
+	facturation_address_orientation_number = models.CharField(max_length=255, null=True, blank=True)
+	facturation_address_city = models.CharField(max_length=255, null=True, blank=True)
+	facturation_address_postal_code = models.IntegerField(null=True, blank=True)
+	facturation_address_okres = models.CharField(max_length=255, null=True, blank=True)
+	facturation_address_kraj = models.CharField(max_length=255, null=True, blank=True)
+	
+
+	
+	postal_address_street = models.CharField(max_length=255, null=True, blank=True)
+	postal_address_number_subscription = models.IntegerField(null=True, blank=True)
+	postal_address_orientation_number = models.CharField(max_length=255, null=True, blank=True)
+	postal_address_city = models.CharField(max_length=255, null=True, blank=True)
+	postal_address_postal_code = models.IntegerField(null=True, blank=True)
+	postal_address_okres = models.CharField(max_length=255, null=True, blank=True)
+	postal_address_kraj = models.CharField(max_length=255, null=True, blank=True)
+	
+
+
+
+	podil_vlastnictvi_citatel = models.IntegerField(null=True, blank=True)
+	podil_vlastnictvi_jmenovatel = models.IntegerField(null=True, blank=True)
+	floor_area = models.FloatField(null=True, blank=True)
+	
+	
+
+
 	date_created = models.DateTimeField(auto_now_add=True, null=True) 
 	history = HistoricalRecords()
 
@@ -217,17 +251,19 @@ class Flat(models.Model):
 
 
 
-"""
+
 
 class Main_electrometer(models.Model):
 
 
-	identification_number = models.CharField(max_length=255, null=False)
+	identification_number = models.CharField(max_length=255, null=True, blank=True)
 	from_date = models.DateField(null=True)
 	to_date = models.DateField(blank=True, null=True)
 	
-	svj = models.ForeignKey(Svj, on_delete=models.SET_NULL, null=True)
-	date_created = models.DateTimeField(auto_now_add=True, null=True)
+	svj = models.ForeignKey(Svj, on_delete=models.SET_NULL, null=True, blank=True)
+	date_created = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+
+	notes = models.TextField(blank=True, null = True)
 
 	history = HistoricalRecords()
 
@@ -239,13 +275,15 @@ class Main_electrometer(models.Model):
 class Sub_electrometer(models.Model):
 
 
-	identification_number = models.CharField(max_length=255, null=False)
+	identification_number = models.CharField(max_length=255, null=False, blank=True)
 	from_date = models.DateField(null=False)
 	to_date = models.DateField(blank=True, null=True)
 
-	flat = models.ForeignKey(Flat, on_delete=models.SET_NULL, null=True)
-	svj = models.ForeignKey(Svj, on_delete=models.SET_NULL, null=True)
+	flat = models.ForeignKey(Flat, on_delete=models.SET_NULL, null=True, blank=True)
+	svj = models.ForeignKey(Svj, on_delete=models.SET_NULL, null=True, blank=True)
 	date_created = models.DateTimeField(auto_now_add=True, null=True)
+
+	notes = models.TextField(blank=True, null = True)
 
 
 	def __str__(self):
@@ -255,13 +293,16 @@ class Sub_electrometer(models.Model):
 class Solar_electrometer(models.Model):
 
 
-	identification_number = models.CharField(max_length=255, null=False)
+	identification_number = models.CharField(max_length=255, null=False, blank=True)
 	from_date = models.DateField(null=False)
 	to_date = models.DateField(blank=True, null=True)
 
-	svj = models.ForeignKey(Svj, on_delete=models.SET_NULL, null=True)
-	gsm_modul = models.ForeignKey(Gsm_modul, on_delete=models.SET_NULL, null=True)
+	svj = models.ForeignKey(Svj, on_delete=models.SET_NULL, null=True, blank=True)
+	gsm_modul = models.ForeignKey(Gsm_modul, on_delete=models.SET_NULL, null=True, blank=True)
 	date_created = models.DateTimeField(auto_now_add=True, null=True)
+	
+	notes = models.TextField(blank=True, null = True )
+
 
 	history = HistoricalRecords()
 
@@ -270,6 +311,8 @@ class Solar_electrometer(models.Model):
 		return str(self.identification_number) + " -- " + str(self.svj)	
 
 
+
+"""
 class Balance_main(models.Model):
 
 	
