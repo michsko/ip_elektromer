@@ -15,7 +15,7 @@
 
 
 <a type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#svjModal" title="Timto tlačítkem můžete přidat společenství vlastníků bytových jednotek." href=''>&nbsp; Přídat Společenství vlastníků &nbsp;</a></td>
-
+<!-- Modal pridani svj-->
 <div class="modal" id="svjModal" tabindex="-1">
 
   <div class="modal-dialog modal-lg">
@@ -50,25 +50,13 @@
 			    <tr>
 			      <th scope="col">Název SVJ</th>
 			      <th scope="col">Adresa</th>
-			      <th scope="col">Info</th>
-			      <th scope="col">IČO</th>
-			      <th scope="col">DIČ</th>
-			      <th scope="col">Číslo účtu</th>
-			      <th scope="col">Email</th>
-			      <th scope="col">Telefon</th>
+			      <th scope="col">Informace</th>
+			      <th scope="col">Kontakt</th>   
 			      <th scope="col">Aktivní</th>
-			      <th scope="col">od</th>
-			      <th scope="col">do</th>
-			      <th></th>
-			      <th></th>
-			      <th></th>
-			      <th></th>
-		
-			     
-				
-			      
-			  
-				 
+			      <th scope="col">Jednotné <br>Odběrné<br>Místo</th>
+			      <th scope="col">Elektroměr</th>
+			      <th scope="col">Gsm Modul</th>
+			      <th scope="col">Byt</th>
 
 			      
 			    </tr>
@@ -81,43 +69,126 @@
 				      <td>{{svj.address_street}} {{svj.address_orientation_number}} / {{svj.address_number_subscription}}, <br> {{svj.address_city}}, {{svj.address_postal_code}}</td>
 				      
 				      <td>
-<a tabindex="0" class="btn btn-lg btn-danger" role="button" data-toggle="popover" data-trigger="focus" title="Dismissible popover" data-content="And here's some amazing content. It's very engaging. Right?">Dismissible popover</a>
-<div class="container">				      	
-<a href="#" title="Dismissible popover" data-toggle="popover" data-trigger="focus" data-content="Click anywhere in the document to close this popover">click
-<img src="{% static 'images/icons/info.png'%}" style="width: 35px; height: 35px;" /></a></td>
-</div>
+						<a type="button" data-bs-toggle="modal" data-bs-target="#infoModal" title="Kliknutím na tuto ikonu zobrazíte infromace IČO, DIČ, ČÍSLO ÚČTU.">
+						  <img src="{% static 'images/icons/info.png'%}" style="width: 35px; height: 35px;"/>
+						</a>
+
+						<!-- Modal informace -->
+						<div class="modal" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="infoModalLabel" aria-hidden="true">
+						  <div class="modal-dialog" role="document">
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <h5 class="modal-title" id="exampleModalLabel">Informace o {{svj.name}}</h5>
+						        
+						        
+						      </div>
+						      <div class="modal-body">
+						        IČO: {{svj.ico}}
+						        <br>DIČ: {{svj.tax_number}}
+						        <br>ČÍSLO ÚČTU: {{svj.account_number}}
+						      </div>
+						      <div class="modal-footer">
+						        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zavřít</button>
+						      
+						      </div>
+						    </div>
+						  </div>
+						</div>
+					</td>
+
+					<td>
+					  <a type="button" data-bs-toggle="modal" data-bs-target="#contactModal" title="Kliknutím na tuto ikonu zobrazíte kontaktní infromace. ADRESA, TELEFON, EMAIL">
+						  <img src="{% static 'images/icons/contacts.png'%}" style="width: 35px; height: 35px;"/>
+						</a>
+
+					  <!-- Modal contact -->
+						<div class="modal" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="infoModalLabel" aria-hidden="true">
+						  <div class="modal-dialog" role="document">
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <h5 class="modal-title" id="exampleModalLabel">Informace o {{svj.name}}</h5>
+						        
+						        
+						      </div>
+						      <div class="modal-body">
+						        EMAIL: {{svj.email}}
+						        <br>TELEFON: {{svj.phone}}
+						        <br>ADRESA:<br>
+						        {{svj.address_street}} {{svj.address_orientation_number}} / {{svj.address_number_subscription}}, <br> {{svj.address_city}}, {{svj.address_postal_code}}
+						        
+						      </div>
+						      <div class="modal-footer">
+						        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zavřít</button>
+						      
+						      </div>
+						    </div>
+						  </div>
+						</div>
+					</td>
 
 
 
-
-				      <td>{{svj.ico}}</td>
-				      <td>{{svj.tax_number}}</td>
-
-				      <td>{{svj.account_number}}
-				      <td>{{svj.email}}</td>
-				      <td>{{svj.phone}}</td>
+				
 
 				      {% if svj.active == True %}
-				      <th style="color: green;">✔</th>
+				      <th>	  <a type="button" data-bs-toggle="modal" data-bs-target="#activeModal" title="Kliknutím na tuto ikonu zobrazíte termíny adktivity OD - DO ">
+						  <img src="{% static 'images/icons/check-mark.png'%}" style="width: 35px; height: 35px;"/>
+						</a>
+
+					  <!-- Modal active -->
+						<div class="modal" id="activeModal" tabindex="-1" role="dialog" aria-labelledby="infoModalLabel" aria-hidden="true">
+						  <div class="modal-dialog" role="document">
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <h5 class="modal-title" id="exampleModalLabel">Informace o {{svj.name}}</h5>
+						        
+						        
+						      </div>
+						      <div class="modal-body">
+						        AKTIVNÍ OD: {{svj.active_from}}
+						        
+						      </div>
+						      <div class="modal-footer">
+						        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zavřít</button>
+						      
+						      </div>
+						    </div>
+						  </div>
+						</div></th>
 
 				      {% else %}
 
-				      <th style="color: red;">x</th>
+				       <th><a type="button" data-bs-toggle="modal" data-bs-target="#notactiveModal" title="Kliknutím na tuto ikonu zobrazíte termíny adktivity OD - DO ">
+						  <img src="{% static 'images/icons/cross.png'%}" style="width: 35px; height: 35px;"/>
+						</a>
 
+					  <!-- Modal notactive -->
+						<div class="modal" id="notactiveModal" tabindex="-1" role="dialog" aria-labelledby="infoModalLabel" aria-hidden="true">
+						  <div class="modal-dialog" role="document">
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <h5 class="modal-title" id="exampleModalLabel">Informace o {{svj.name}}</h5>
+						        
+						        
+						      </div>
+						      <div class="modal-body">
+						        AKTIVNÍ OD: {{svj.active_from}}
+						        <br>
+						        AKTIVNÍ DO: {{svj.active_to}}
+						        
+						      </div>
+						      <div class="modal-footer">
+						        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zavřít</button>
+						      
+						      </div>
+						    </div>
+						  </div>
+						</div>
+						</th>
 				      {% endif %}
 				      
 
-				      <th>{{svj.active_from}}</th>
-				      
-				      {% if svj.active == False %}
-
-				      <th>{{svj.active_to}}</th>
-
-				      {% else %}
-
-				      <th> </th>
-
-				      {% endif %}
+				 
 				  
 
 				       <td><a data-bs-toggle="tooltip" title="Timto tlačítkem můžete přejít k zobrazení hlavních elektroměrech." href='{% url "svj" svj.id %}'><img src="{% static 'images/icons/meter.png' %}" style="width: 35px; height: 35px;" /></a>
@@ -141,7 +212,6 @@
 	</center>
 	</div>
 <container>
-
 
 
 
