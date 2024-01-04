@@ -297,10 +297,14 @@ class SvjForm(ModelForm):
 				  'address_orientation_number': 'číslo orientační', 
 				  'address_number_subscription': 'číslo popisné',
 				  'address_city': 'Město',
-				  'address_postal_code': 'PSČ', 
+				  'address_postal_code': 'PSČ',
+				  'law_form': 'Právní forma',
+				  'supplier': 'Dodavatel',
 				  'account_number': 'Číslo účtu',
 				  'energy_supply' : 'Dodavatel',
 				  'number_of_flats': 'Počet bytů',
+				  'active': 'Aktivní',
+				  'active_to': 'Aktivní do',
 
 					}
 

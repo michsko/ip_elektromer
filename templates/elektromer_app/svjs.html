@@ -83,9 +83,11 @@
 						        
 						      </div>
 						      <div class="modal-body">
-						        IČO: {{svj.ico}}
-						        <br>DIČ: {{svj.tax_number}}
-						        <br>ČÍSLO ÚČTU: {{svj.account_number}}
+						        IČO: <b>{{svj.ico}}</b>
+						        <br>DIČ: <b>{{svj.tax_number}}</b>
+						        <br>ČÍSLO ÚČTU: <b>{{svj.account_number}}</b>
+						        <br>PRÁVNÍ FORMA: <B>{{svj.law_form}}</B>
+						        <br>DODAVATEL: <B>{{svj.supplier}}</B>
 						      </div>
 						      <div class="modal-footer">
 						        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zavřít</button>
@@ -111,10 +113,12 @@
 						        
 						      </div>
 						      <div class="modal-body">
-						        EMAIL: {{svj.email}}
-						        <br>TELEFON: {{svj.phone}}
+						        EMAIL: <b>{{svj.email}}</b>
+						        <br>TELEFON: <b>{{svj.phone}}</b>
 						        <br>ADRESA:<br>
-						        {{svj.address_street}} {{svj.address_orientation_number}} / {{svj.address_number_subscription}}, <br> {{svj.address_city}}, {{svj.address_postal_code}}
+						        <b>{{svj.address_street}} 
+						        {{svj.address_orientation_number}} / {{svj.address_number_subscription}}, <br> {{svj.address_city}},
+						        {{svj.address_postal_code}}</b>
 						        
 						      </div>
 						      <div class="modal-footer">
@@ -145,7 +149,7 @@
 						        
 						      </div>
 						      <div class="modal-body">
-						        AKTIVNÍ OD: {{svj.active_from}}
+						        AKTIVNÍ OD: {{svj.active_from}}</b>
 						        
 						      </div>
 						      <div class="modal-footer">
@@ -191,14 +195,14 @@
 				 
 				  
 
-				       <td><a data-bs-toggle="tooltip" title="Timto tlačítkem můžete přejít k zobrazení hlavních elektroměrech." href='{% url "svj" svj.id %}'><img src="{% static 'images/icons/meter.png' %}" style="width: 35px; height: 35px;" /></a>
+				       <td><a data-bs-toggle="tooltip" title="Timto tlačítkem můžete přejít k zobrazení hlavních elektroměrech." href='{% url "main_electrometers"  %}'><img src="{% static 'images/icons/meter.png' %}" style="width: 35px; height: 35px;" /></a>
 				       </td>
 				      </td>
-				       <td><a data-bs-toggle="tooltip" title="Timto tlačítkem můžete přejít k zobrazení tohoto podružného elektroměru." href='{% url "svj" svj.id %}'><img src="{% static 'images/icons/smart-meter.png' %}" style="width: 35px; height: 35px;"/></a></td>
+				       <td><a data-bs-toggle="tooltip" title="Timto tlačítkem můžete přejít k zobrazení tohoto podružného elektroměru." href='{% url "sub_electrometers" %}'><img src="{% static 'images/icons/smart-meter.png' %}" style="width: 35px; height: 35px;"/></a></td>
 				      
-				  	    <td><a data-bs-toggle="tooltip" title="Timto tlačítkem můžete přejít k zobrazení tohoto gsm modulu." href='{% url "svj" svj.id %}'><img src="{% static 'images/icons/gsm.png' %}" style="width: 35px; height: 35px;"/></a></td>
+				  	    <td><a data-bs-toggle="tooltip" title="Timto tlačítkem můžete přejít k zobrazení tohoto gsm modulu." href='{% url "gsm_moduls"  %}'><img src="{% static 'images/icons/gsm.png' %}" style="width: 35px; height: 35px;"/></a></td>
 				     
-				        <td><a data-bs-toggle="tooltip" title="Timto tlačítkem můžete přejít k zobrazení bytů." href='{% url "svj" svj.id %}'><img src="{% static 'images/icons/flat.png' %}" style="width: 35px; height: 35px;"/></a></td>
+				        <td><a data-bs-toggle="tooltip" title="Timto tlačítkem můžete přejít k zobrazení bytů." href='{% url "flats"  %}'><img src="{% static 'images/icons/flat.png' %}" style="width: 35px; height: 35px;"/></a></td>
 
 
 		     
